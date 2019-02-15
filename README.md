@@ -29,19 +29,27 @@ Filtering of SNPs for 1) population genetic analyses, and 2) outlier/Environment
 
 How did A.agestis colonise the UK? 
 
-fastSimCoal analyses
+  - fastSimCoal analyses
 
 
 ## 5.SpecialisationAtRangeMargin.md
 
+Are the environments significantly different between newly colonised and established sites? 
+
+  - PCA of new vs old landscapes
+
 Have population at the range margin become specialised? What are the main drivers of genetic divergence here? 
 
-RDA analysis
+   - Redundancy and partial Redundancy analyses
 
 
-## 5.AdaptationtoHostPlant.md
+## 6.AdaptationtoHostPlant.md
 
 Has A.agestis specialised on new host plant at range margins? 
+
+   - Environmental Association Analysis
+      
+      Identify outliers 
 
 
 
