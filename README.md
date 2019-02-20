@@ -102,10 +102,6 @@ How did A.agestis colonise the UK?
 
 ## 5.SpecialisationAtRangeMargin.md
 
-Are the environments significantly different between newly colonised and established sites? 
-
-  - PCA of new vs old landscapes
-
 Have population at the range margin become specialised? What are the main drivers of genetic divergence here? 
 
    - Redundancy and partial Redundancy analyses
