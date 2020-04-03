@@ -12,17 +12,11 @@
 VERSION='1.1.0-2020.04.03'
 
 #Define module versions to be loaded
-MODULE1='apps/samtools-1.8'
-MODULE2='apps/bcftools-1.8'
-MODULE3='languages/perl-5.14.2'
-MODULE4='languages/java-jdk-1.8.0-66'
-
-SAMTOOLS='samtools'
+MODULE1='languages/perl-5.14.2'
+MODULE2='languages/java-jdk-1.8.0-66'
 
 # Default values for optional variables
 REGIONS=''
-HRS=24
-MEM=16
 NJOBS=100
 MAXNREGSPERJOB=50
 JOBNAME='callREGIONS'
@@ -79,7 +73,7 @@ author
 
 # Get options from the command line
 # -----------------------------------------------------------------------------
-if [ "$#" -ge "1" ]; # min 6 args: 2 for -i <input directory>, 2 for -r <fasta file>, 2 for -o <output directory>
+if [ "$#" -ge "1" ]; # min 1 args: 1 for -r <fasta file>
 then 
 	while [ $# -gt 0 ]; do
 		case "$1" in
@@ -91,51 +85,9 @@ then
 			-o)	shift
 				OUTDIR=$(readlink -f $1)
 				;;
-			-regs)	shift
-				REGIONS=$(readlink -f $1)
-				;;
-			-c)	shift
-				CALLMODE=$1
-				;;
-			-v)	shift
-				VARONLY=$1
-				;;
-			-d)	shift
-				INDELS=$1
-				;;
-			-s)	shift
-				MINMQS=$1
-				;;
-			-p)	shift
-				PVAR=$1
-				;;
-			-t)	shift
-				HRS=$1
-				;;
-			-m)	shift
-				MEM=$1
-				;;
-			-q)	shift
-				QUEUE=$1
-				;;
-			-module1)	shift
-					MODULE1=$1
-					;;
-                        -module2)	shift
-                                        MODULE2=$1
-                                        ;;
-                        -module3)	shift
-                                        MODULE3=$1
-                                        ;;
-                        -module4)	shift
-                                        MODULE4=$1
-                                        ;;
 			-job)	shift
 				JOBNAME=$1
 				;;
-			-e)	shift
-				EMAIL=$1
-				;;	
 			*)	echo 
 				echo "ERROR - Invalid option: $1"
 				echo
