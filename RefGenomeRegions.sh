@@ -9,6 +9,7 @@
 # Description:
 # Modification of previous script (03a_call_SNVs_bluecp3.sh) to split the reference in multiple regions to be used for ANGSD 
 
+VERSION='1.1.0-2020.04.03'
 
 #Define module versions to be loaded
 MODULE1='apps/samtools-1.8'
@@ -30,7 +31,7 @@ HRS=24
 MEM=16
 NJOBS=100
 MAXNREGSPERJOB=50
-JOBNAME='callSNVs'
+JOBNAME='callREGIONS'
 
 # Show author
 # -----------------------------------------------------------------------------
@@ -52,18 +53,18 @@ function usage {
 	echo
 	echo "Usage:"
 	echo "  $(basename $0)"
-	echo "      -i <input directory>  => Directory with BAM files (one file per sample/individual)"
+	#echo "      -i <input directory>  => Directory with BAM files (one file per sample/individual)"
 	echo "      -r <fasta file>       => Reference sequence used for alignment"
 	echo "      -o <output directory> => Output folder"
-	echo "      -regs <regions file>  => Regions file (optional, use scaffolds/chromosomes grouped for up to $NJOBS jobs otherwise)"
-	echo "      -c <c|m>              => bcftools caller; c=consensus, m=multi-allelic (optional, default=$CALLMODE)"
-	echo "      -v <0|1>              => call only variants (optional, default=$VARONLY)"
-	echo "      -d <0|1>              => call also indels (optional, default=$INDELS)"
-	echo "      -s <quality score>    => minimum phred quality score for alignments to be used for calling (optional, default=$MINMQS)"
-	echo "      -p <float 0-1>        => prob. of data under the hypothesis that locus is invariant (optional, default=$PVAR)"
+	#echo "      -regs <regions file>  => Regions file (optional, use scaffolds/chromosomes grouped for up to $NJOBS jobs otherwise)"
+	#echo "      -c <c|m>              => bcftools caller; c=consensus, m=multi-allelic (optional, default=$CALLMODE)"
+	#echo "      -v <0|1>              => call only variants (optional, default=$VARONLY)"
+	#echo "      -d <0|1>              => call also indels (optional, default=$INDELS)"
+	#echo "      -s <quality score>    => minimum phred quality score for alignments to be used for calling (optional, default=$MINMQS)"
+	#echo "      -p <float 0-1>        => prob. of data under the hypothesis that locus is invariant (optional, default=$PVAR)"
 	echo "      -t <allocated time>   => Allocated time (in hours) for the analysis (optional: default=$HRS)"
 	echo "      -m <allocated memory> => Allocated memory (in gigabytes) for each analysis (optional: default=$MEM)"
-	echo "      -q <queue>            => SGE queue: iceberg | popgenom | molecol (optional: default=iceberg)"
+	#echo "      -q <queue>            => SGE queue: iceberg | popgenom | molecol (optional: default=iceberg)"
 	echo "      -e <email>            => Notification email address (default=none)"
 	echo "      -module1 <ModuleName> => Name of module to load"
 	echo "      -module2 <ModuleName> => Name of module to load" 
@@ -73,7 +74,7 @@ function usage {
 	echo "      -h                    => show this help"
 	echo ""
 	echo "  Example:"
-	echo "      $(basename $0) -i input_dir -o output_dir -r reference -q popgenom"
+	echo "      $(basename $0) -r reference"
 	echo ""
 	echo ""
 	exit 0
@@ -90,9 +91,6 @@ then
 		case "$1" in
 			-h|-help) usage
 					  ;;
-			-i)	shift
-				INDIR=$(readlink -f $1)
-				;;
 			-r)	shift
 				REFERENCE=$(readlink -f $1)
 				;;
@@ -157,19 +155,9 @@ else
 fi
 # -----------------------------------------------------------------------------
 
-# Check $INDIR, $OUTDIR are $REFERENCE are defined
+# Check $REFERENCE are defined
 # -----------------------------------------------------------------------------
-if [[ -z $INDIR || -z $OUTDIR || -z $REFERENCE ]]; then
-	if [ -z $INDIR ]; then
-		echo
-		echo "ERROR: You must specify an input directory"
-		echo
-	fi
-	if [ -z $OUTDIR ]; then
-		echo
-		echo "ERROR: You must specify an output directory"
-		echo
-	fi
+if [[ -z $REFERENCE ]]; then
 	if [ -z $REFERENCE ]; then
 		echo
 		echo "ERROR: You must specify a reference file"
@@ -179,15 +167,8 @@ if [[ -z $INDIR || -z $OUTDIR || -z $REFERENCE ]]; then
 fi
 # -----------------------------------------------------------------------------
 
-# Check $INDIR and $REFERENCE exist
+# Check $REFERENCE exist
 # -----------------------------------------------------------------------------
-if [ ! -d $INDIR ]; then
-	echo
-	echo "ERROR: I can't find the input directory $INDIR"
-	echo
-	exit
-fi
-
 if [ ! -f $REFERENCE ]; then
 	echo
 	echo "ERROR: I can't find the reference file $REFERENCE"
@@ -214,7 +195,7 @@ then
 
 	CUMSIZE=0
 	NREGS=0
-	echo -n > $OUTDIR/regions
+	echo -n > regions
 	RC=1
 	# for I in $REGIONS;
 	for ((i=0; i<${#REGSIZES[*]}; i++));
@@ -226,14 +207,14 @@ then
 
 		if [[ $CUMSIZE -gt $JOBSIZE || $NREGS -gt $MAXNREGSPERJOB ]];
 		then
-			echo "$REG" >> $OUTDIR/regions
+			echo "$REG" >> regions
 			# echo "Set of regions size: $CUMSIZE"
 			CUMSIZE=0
 			NREGS=0
 			echo -ne "  number of jobs: $RC\r"
 			RC=$(($RC + 1))
 		else
-			echo -n "$REG," >> $OUTDIR/regions
+			echo -n "$REG," >> regions
 			NREGS=$((NREGS + 1))
 		fi
 	done
@@ -241,17 +222,17 @@ then
 	if [[ $CUMSIZE -gt 0 ]];
 	then
 		echo -e "  number of jobs: $RC\r"
-		echo >> $OUTDIR/regions
+		echo >> regions
 	fi
 	
-	perl -pi -e 's/,$//g' $OUTDIR/regions
+	perl -pi -e 's/,$//g' regions
 	echo
 	echo
 else
-	cp $REGIONS $OUTDIR/regions
+	cp $REGIONS regions
 fi
 
-REGIONS=$OUTDIR/regions
+REGIONS=regions
 
 # number of regions
 N=$(cat $REGIONS | wc -l)
