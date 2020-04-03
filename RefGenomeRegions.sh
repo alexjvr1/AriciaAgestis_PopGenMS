@@ -21,12 +21,6 @@ SAMTOOLS='samtools'
 
 # Default values for optional variables
 REGIONS=''
-CALLMODE='c'
-VARONLY='1'
-INDELS='0'
-MINMQS=20
-PVAR='0.05'
-EMAIL=''
 HRS=24
 MEM=16
 NJOBS=100
@@ -85,7 +79,7 @@ author
 
 # Get options from the command line
 # -----------------------------------------------------------------------------
-if [ "$#" -ge "6" ]; # min 6 args: 2 for -i <input directory>, 2 for -r <fasta file>, 2 for -o <output directory>
+if [ "$#" -ge "1" ]; # min 6 args: 2 for -i <input directory>, 2 for -r <fasta file>, 2 for -o <output directory>
 then 
 	while [ $# -gt 0 ]; do
 		case "$1" in
