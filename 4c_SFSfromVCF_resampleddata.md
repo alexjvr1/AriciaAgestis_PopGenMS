@@ -11,12 +11,29 @@ Here I use [Vitor Sousa's scripts](https://github.com/vsousa/EG_cE3c/tree/master
 pwd
 /newhome/aj18951/1a_Aricia_agestis_PopGenomics/FastSimCoal/GENERATE_INPUT
 
-bcftools query -l ../../FINAL_VCF/AA261.0.5miss.9popsMerged.vcf >>  indpopinfo.txt
+bcftools query -l ../../FINAL_VCF/AA261.0.5miss.9popsMerged.vcf >>  indnames
 bcftools query -l ../../FINAL_VCF/AA261.0.5miss.9popsMerged.vcf | awk -F "_" '{print $1}' >>popnames
 
-##EITHER paste indpopinfo.txt popnames >> test OR
+sed -i 's/BCH/SOUTH/g' popnames 
+sed -i 's/SWD/SOUTH/g' popnames 
+sed -i 's/LYD/SOUTH/g' popnames 
 
-awk 'BEGIN{getline to_add < "popnames"}{print $0,to_add }' indpopinfo.txt
+sed -i 's/BRO/NEW/g' popnames 
+sed -i 's/WIS/NEW/g' popnames 
+sed -i 's/MOF/NEW/g' popnames 
+sed -i 's/BAR/NEW/g' popnames 
+
+paste indnames popnames >> indpopinfo.txt
+
+grep HOD indpopinfo.txt |wc -l
+30
+grep FOR indpopinfo.txt |wc -l
+20
+grep SOUTH indpopinfo.txt |wc -l
+98
+grep NEW indpopinfo.txt |wc -l
+113
+
 ```
 
 
