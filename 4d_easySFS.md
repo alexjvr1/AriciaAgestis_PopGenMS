@@ -93,3 +93,46 @@ Doing 2D sfs - ('FOR', 'HOD')
 Doing multiSFS for all pops
 ```
 
+### INPUT VCF
+
+I'm using the final vcf file before the MAF 0.01 filter
+
+```
+vcftools --vcf AAgestis.264_FINAL_noMAF_recode.vcf --thin 600
+
+VCFtools - v0.1.12b
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--vcf AAgestis.264_FINAL_noMAF_recode.vcf
+	--thin 600
+
+After filtering, kept 264 out of 264 Individuals
+After filtering, kept 5625 out of a possible 63054 Sites
+Run Time = 1.00 seconds
+```
+
+There seem to be a lot more independent loci in this dataset than before. I'm not using the --thin filter, but rather using easySFS to randomly sample a SNP per locus for the final SFS.  
+
+
+### 1. Generate inputs for base model
+
+We're first estimating the base model. i.e. what is the most likely colonisation scenario of the older populations (SOUTH, HOD, and FOR). 
+
+Modify the pop file input and estimate the SFS for these three populations: 
+
+```
+bluecp3:/newhome/aj18951/1a_Aricia_agestis_PopGenomics/FastSimCoal/GENERATE_INPUT/easySFS/
+
+popfile: noMAF.BaseModel.popinput
+```
+
+preview
+```
+module load languages/python-anaconda3-2019.10
+conda activate easySFS
+
+./easySFS.py -i ~/1a_Aricia_agestis_PopGenomics/FINAL_VCF/AAgestis.264_FINAL_noMAF_recode.vcf -p noMAF.BaseModel.popinput --preview
+```
+
+
