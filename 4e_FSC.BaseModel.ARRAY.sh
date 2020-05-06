@@ -33,7 +33,7 @@
 #PBS -l mem=16gb #RAM
 #PBS -l walltime=10:00:00 ##wall time.  
 #PBS -j oe  #concatenates error and output files (with prefix job1)
-#PBS -t 1-6 #Number of ArrayJobs
+#PBS -t 1-100 #Number of ArrayJobs
 
 
 #run job in working directory
@@ -53,7 +53,7 @@ echo "Fastsimcoal version ${fsc}" >> fsc.log
 
 ##--- Name of folder where the error and output log files will be saved
 msgs=conOutput
-echo "Error and log files saved in folder ${msgs}" >> fsc.log
+echo "Error and log files saved in folder ${msgs}"
 
 ##--- Number of runs (this can be use to keep adding runs for each model)
 #runBase=1   # initial run number
@@ -61,7 +61,7 @@ echo "Error and log files saved in folder ${msgs}" >> fsc.log
 
 ##--- Fastsimcoal related parameters
 # -n option
-maxNumSims=10	
+maxNumSims=100000	
 # -L option
 maxNumLoopsInBrentOptimization=50
 # -C option
@@ -114,8 +114,8 @@ mkdir ${msgs}_${dirname} 2>/dev/null
 
 
 #Define Array names
-seq $baseRuns $numRuns >> numRunsSeq
-sed 's/^/Run/g' numRunsSeq >> numRunsSeq2
+#seq $baseRuns $numRuns >> numRunsSeq
+#sed 's/^/Run/g' numRunsSeq >> numRunsSeq2
 NAME=$(sed "${PBS_ARRAYID}q;d" numRunsSeq2)
 
 
@@ -153,47 +153,45 @@ echo "Output saved in folder ${poptag}-${tplEstTag}" >> fsc.log
 # COLLECT RESULTS 
 ####################################
 
-summaryfile="${dirname}_ALL.param";
-numFiles=1;
-for (( runsDone=$runBase; runsDone<=$numRuns; runsDone++ ))
-do		
-   runDir="run$runsDone"
-   if [ -d "$runDir" ];	
-   then
-	echo "---------------------------"
-	echo "Getting results from: ${dirname}/${runDir}"
-	echo ""		
-	cd $runDir
-	# if folder exists
-	if [ -d ${dirname} ]; 
-	then
-		cd ${dirname}
-		#Processing best likelihood file
-		bestlhoodFile=${dirname}.bestlhoods
-		echo "NumFiles=${numFiles}"
-		# if file exists				
-		if [ -f $bestlhoodFile ];
-		then
-			echo "File $bestlhoodFile exists."
-			if [ $numFiles -lt 2 ]; 	
-			then
-				header=$(sed '1!d'  $bestlhoodFile)
-				echo -e "File\t$header" > ../../${summaryfile}					
-			fi
-
-			#Extract second line
-			wantedParameters=$(sed '2!d'  $bestlhoodFile)
-			echo -e "${dirname}/${runDir}\t$wantedParameters" >> ../../${summaryfile}
-			# increase the number of files read
-			let numFiles=numFiles+1
-		else
-		   echo "File $bestlhoodFile does not exist for run ${runDir}."
-		fi				
-                # out of bestlhood folder
-		cd ..				  				
-	fi
-	# out of run folder
-	cd ..
-	
-   fi
-done
+#summaryfile="${dirname}_ALL.param";
+#numFiles=1;
+		
+   #runDir=${NAME}
+ #  if [ -d "$runDir" ];	
+  # then
+#	echo "---------------------------"
+#	echo "Getting results from: ${dirname}/${runDir}"
+#	echo ""		
+#	cd $runDir
+#	# if folder exists
+#	if [ -d ${dirname} ]; 
+#	then
+#		cd ${dirname}
+#		#Processing best likelihood file
+#		bestlhoodFile=${dirname}.bestlhoods
+#		echo "NumFiles=${numFiles}"
+#		# if file exists				
+#		if [ -f $bestlhoodFile ];
+#		then
+#			echo "File $bestlhoodFile exists."
+#			if [ $numFiles -lt 2 ]; 	
+#			then
+#				header=$(sed '1!d'  $bestlhoodFile)
+#				echo -e "File\t$header" > ../../${summaryfile}					
+#			fi
+#
+#			#Extract second line
+#			wantedParameters=$(sed '2!d'  $bestlhoodFile)
+#			echo -e "${dirname}/${runDir}\t$wantedParameters" >> ../../${summaryfile}
+#			# increase the number of files read
+#			let numFiles=numFiles+1
+#		else
+#		   echo "File $bestlhoodFile does not exist for run ${runDir}."
+#		fi				
+ #               # out of bestlhood folder
+#		cd ..				  				
+#	fi
+#	# out of run folder
+#	cd ..
+#
+ #  fi
