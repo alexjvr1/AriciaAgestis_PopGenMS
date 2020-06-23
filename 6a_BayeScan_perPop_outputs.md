@@ -32,13 +32,334 @@ Below is the basic script and then I show the output for each of the runs.
 source("plot_R.r")
 library(coda)
 
-chain <- read.table("AA216.HostPlantPop.baye.sel", header=T)
-chain <- mcmc(chain, thin=10)
+temp <- list.files(pattern="*sel")
+chain.list <- lapply(temp, FUN=read.table, header=T)
+chain.list2 <- lapply(chain.list, FUN=mcmc, thin=10)
 
-plot(chain)  ##check for convergence
-summary(chain)
+##Check convergence
+pdf("HostPlant.convergence.pdf")
+lapply(chain.list2, FUN=plot)
+dev.off()
 
-autocorr.diag(chain) ## check correlation between the chains. Make sure the chains didn't get stuck
+lapply(chain.list2, FUN=summary)
+
+[[1]]
+
+Iterations = 1:49981
+Thinning interval = 10 
+Number of chains = 1 
+Sample size per chain = 4999 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+           Mean        SD  Naive SE Time-series SE
+logL -2.833e+05 1.742e+02 2.463e+00      4.648e+00
+Fst1  2.000e-02 2.981e-04 4.216e-06      6.999e-06
+Fst2  2.024e-02 3.168e-04 4.481e-06      7.645e-06
+Fst3  2.354e-02 4.903e-04 6.934e-06      9.587e-06
+
+2. Quantiles for each variable:
+
+           2.5%        25%        50%        75%      97.5%
+logL -2.836e+05 -2.834e+05 -2.833e+05 -2.832e+05 -2.830e+05
+Fst1  1.942e-02  1.979e-02  2.000e-02  2.020e-02  2.057e-02
+Fst2  1.964e-02  2.002e-02  2.024e-02  2.046e-02  2.087e-02
+Fst3  2.258e-02  2.321e-02  2.352e-02  2.386e-02  2.450e-02
+
+
+[[2]]
+
+Iterations = 1:49981
+Thinning interval = 10 
+Number of chains = 1 
+Sample size per chain = 4999 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+           Mean        SD  Naive SE Time-series SE
+logL -2.788e+05 2.810e+02 3.975e+00      1.171e+01
+Fst1  1.936e-03 1.571e-04 2.221e-06      6.541e-06
+Fst2  2.577e-02 2.850e-04 4.031e-06      5.098e-06
+Fst3  3.280e-02 4.276e-04 6.048e-06      7.000e-06
+
+2. Quantiles for each variable:
+
+           2.5%        25%        50%        75%      97.5%
+logL -2.794e+05 -2.790e+05 -2.788e+05 -2.787e+05 -2.783e+05
+Fst1  1.633e-03  1.827e-03  1.932e-03  2.046e-03  2.240e-03
+Fst2  2.521e-02  2.557e-02  2.577e-02  2.596e-02  2.631e-02
+Fst3  3.197e-02  3.251e-02  3.280e-02  3.309e-02  3.367e-02
+
+
+[[3]]
+
+Iterations = 1:49981
+Thinning interval = 10 
+Number of chains = 1 
+Sample size per chain = 4999 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+           Mean        SD  Naive SE Time-series SE
+logL -2.687e+05 1.870e+02 2.645e+00      4.990e+00
+Fst1  1.221e-02 2.503e-04 3.540e-06      7.939e-06
+Fst2  1.999e-02 3.118e-04 4.410e-06      7.794e-06
+Fst3  4.650e-02 8.292e-04 1.173e-05      1.373e-05
+
+2. Quantiles for each variable:
+
+           2.5%        25%        50%        75%      97.5%
+logL -2.691e+05 -2.688e+05 -2.687e+05 -2.686e+05 -2.683e+05
+Fst1  1.172e-02  1.204e-02  1.221e-02  1.238e-02  1.270e-02
+Fst2  1.937e-02  1.978e-02  1.999e-02  2.020e-02  2.060e-02
+Fst3  4.488e-02  4.594e-02  4.649e-02  4.705e-02  4.813e-02
+
+
+[[4]]
+
+Iterations = 1:49981
+Thinning interval = 10 
+Number of chains = 1 
+Sample size per chain = 4999 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+           Mean        SD  Naive SE Time-series SE
+logL -2.749e+05 1.961e+02 2.773e+00      8.232e+00
+Fst1  1.568e-02 2.756e-04 3.899e-06      7.408e-06
+Fst2  2.187e-02 3.282e-04 4.641e-06      7.805e-06
+Fst3  4.050e-02 7.626e-04 1.079e-05      1.379e-05
+
+2. Quantiles for each variable:
+
+           2.5%        25%        50%        75%      97.5%
+logL -2.753e+05 -2.750e+05 -2.749e+05 -2.748e+05 -2.745e+05
+Fst1  1.516e-02  1.550e-02  1.567e-02  1.587e-02  1.623e-02
+Fst2  2.122e-02  2.165e-02  2.186e-02  2.209e-02  2.250e-02
+Fst3  3.903e-02  3.997e-02  4.050e-02  4.101e-02  4.198e-02
+
+
+[[5]]
+
+Iterations = 1:49981
+Thinning interval = 10 
+Number of chains = 1 
+Sample size per chain = 4999 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+           Mean        SD  Naive SE Time-series SE
+logL -2.814e+05 2.085e+02 2.949e+00      6.342e+00
+Fst1  9.561e-03 2.312e-04 3.270e-06      7.597e-06
+Fst2  3.525e-02 4.045e-04 5.721e-06      7.428e-06
+Fst3  3.195e-02 4.988e-04 7.055e-06      8.814e-06
+
+2. Quantiles for each variable:
+
+           2.5%        25%        50%        75%      97.5%
+logL -2.819e+05 -2.816e+05 -2.814e+05 -2.813e+05 -2.810e+05
+Fst1  9.107e-03  9.404e-03  9.563e-03  9.718e-03  1.001e-02
+Fst2  3.445e-02  3.498e-02  3.525e-02  3.552e-02  3.604e-02
+Fst3  3.098e-02  3.161e-02  3.194e-02  3.229e-02  3.293e-02
+
+
+[[6]]
+
+Iterations = 1:49981
+Thinning interval = 10 
+Number of chains = 1 
+Sample size per chain = 4999 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+           Mean        SD  Naive SE Time-series SE
+logL -6.340e+05 1.597e+02 2.259e+00      5.358e+00
+Fst1  2.319e-02 4.249e-04 6.010e-06      7.174e-06
+Fst2  3.854e-02 4.655e-04 6.584e-06      7.549e-06
+Fst3  4.274e-02 7.396e-04 1.046e-05      1.179e-05
+Fst4  3.726e-02 6.733e-04 9.523e-06      1.027e-05
+Fst5  3.167e-02 4.626e-04 6.543e-06      6.904e-06
+Fst6  3.016e-02 5.233e-04 7.402e-06      9.156e-06
+Fst7  3.015e-02 4.051e-04 5.729e-06      6.548e-06
+Fst8  2.915e-02 4.103e-04 5.803e-06      7.587e-06
+Fst9  4.382e-02 6.342e-04 8.970e-06      1.007e-05
+
+2. Quantiles for each variable:
+
+           2.5%        25%        50%        75%      97.5%
+logL -6.343e+05 -6.341e+05 -6.340e+05 -6.339e+05 -6.337e+05
+Fst1  2.238e-02  2.291e-02  2.319e-02  2.347e-02  2.402e-02
+Fst2  3.764e-02  3.822e-02  3.852e-02  3.885e-02  3.946e-02
+Fst3  4.132e-02  4.224e-02  4.273e-02  4.323e-02  4.421e-02
+Fst4  3.595e-02  3.679e-02  3.726e-02  3.770e-02  3.859e-02
+Fst5  3.075e-02  3.137e-02  3.167e-02  3.199e-02  3.259e-02
+Fst6  2.911e-02  2.981e-02  3.017e-02  3.052e-02  3.117e-02
+Fst7  2.936e-02  2.987e-02  3.015e-02  3.042e-02  3.093e-02
+Fst8  2.835e-02  2.889e-02  2.915e-02  2.942e-02  2.998e-02
+Fst9  4.258e-02  4.340e-02  4.382e-02  4.423e-02  4.509e-02
+
+
+[[7]]
+
+Iterations = 1:49981
+Thinning interval = 10 
+Number of chains = 1 
+Sample size per chain = 4999 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+           Mean        SD  Naive SE Time-series SE
+logL -2.796e+05 2.404e+02 3.399e+00      9.307e+00
+Fst1  3.169e-03 1.652e-04 2.337e-06      6.216e-06
+Fst2  2.681e-02 2.959e-04 4.185e-06      5.371e-06
+Fst3  2.434e-02 3.630e-04 5.134e-06      6.190e-06
+
+2. Quantiles for each variable:
+
+           2.5%        25%        50%        75%      97.5%
+logL -2.801e+05 -2.797e+05 -2.796e+05 -2.794e+05 -2.791e+05
+Fst1  2.848e-03  3.059e-03  3.165e-03  3.280e-03  3.496e-03
+Fst2  2.624e-02  2.661e-02  2.681e-02  2.701e-02  2.739e-02
+Fst3  2.362e-02  2.410e-02  2.434e-02  2.458e-02  2.505e-02
+
+
+[[8]]
+
+Iterations = 1:49981
+Thinning interval = 10 
+Number of chains = 1 
+Sample size per chain = 4999 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+           Mean        SD  Naive SE Time-series SE
+logL -2.796e+05 2.421e+02 3.423e+00      8.676e+00
+Fst1  3.171e-03 1.634e-04 2.312e-06      6.105e-06
+Fst2  2.681e-02 3.008e-04 4.255e-06      5.363e-06
+Fst3  2.435e-02 3.588e-04 5.074e-06      6.024e-06
+
+2. Quantiles for each variable:
+
+           2.5%        25%        50%        75%      97.5%
+logL -2.800e+05 -2.797e+05 -2.796e+05 -2.794e+05 -2.791e+05
+Fst1  2.844e-03  3.063e-03  3.170e-03  3.280e-03  3.488e-03
+Fst2  2.623e-02  2.661e-02  2.681e-02  2.701e-02  2.740e-02
+Fst3  2.363e-02  2.411e-02  2.435e-02  2.458e-02  2.505e-02
+
+
+[[9]]
+
+Iterations = 1:49981
+Thinning interval = 10 
+Number of chains = 1 
+Sample size per chain = 4999 
+
+1. Empirical mean and standard deviation for each variable,
+   plus standard error of the mean:
+
+           Mean        SD  Naive SE Time-series SE
+logL -2.798e+05 1.810e+02 2.560e+00      6.634e+00
+Fst1  1.539e-02 2.372e-04 3.355e-06      6.229e-06
+Fst2  1.111e-02 2.574e-04 3.641e-06      7.315e-06
+Fst3  2.831e-02 4.430e-04 6.266e-06      9.277e-06
+
+2. Quantiles for each variable:
+
+           2.5%        25%        50%        75%      97.5%
+logL -2.801e+05 -2.799e+05 -2.798e+05 -2.796e+05 -2.794e+05
+Fst1  1.493e-02  1.523e-02  1.539e-02  1.555e-02  1.585e-02
+Fst2  1.062e-02  1.094e-02  1.111e-02  1.129e-02  1.163e-02
+Fst3  2.746e-02  2.802e-02  2.830e-02  2.860e-02  2.919e-02
+
+
+lapply(chain.list2, FUN=autocorr.diag) ## check correlation between the chains. Make sure the chains didn't get stuck
+
+[[1]]
+              logL         Fst1          Fst2         Fst3
+Lag 0   1.00000000  1.000000000  1.0000000000  1.000000000
+Lag 10  0.35879059  0.439258636  0.4242972940  0.262232919
+Lag 50  0.05682607  0.006679864  0.0256075076 -0.006724698
+Lag 100 0.05947839  0.010046353 -0.0009297211 -0.023233594
+Lag 500 0.01048752 -0.017819082 -0.0210263390 -0.001227658
+
+[[2]]
+               logL       Fst1        Fst2         Fst3
+Lag 0    1.00000000  1.0000000  1.00000000  1.000000000
+Lag 10   0.71855202  0.7675045  0.20975756  0.145075690
+Lag 50   0.31740046  0.3288519  0.01258458  0.016225844
+Lag 100  0.13600598  0.1117953 -0.01110589  0.001941376
+Lag 500 -0.01913684 -0.0464415 -0.01686811 -0.004592267
+
+[[3]]
+              logL        Fst1         Fst2         Fst3
+Lag 0   1.00000000  1.00000000  1.000000000  1.000000000
+Lag 10  0.43870812  0.64665404  0.415211032  0.156317962
+Lag 50  0.08466230  0.12428070  0.071746556  0.003899578
+Lag 100 0.04768748  0.02117960 -0.002528637  0.011028265
+Lag 500 0.01661087 -0.01103629  0.004492814 -0.011816068
+
+[[4]]
+               logL        Fst1        Fst2          Fst3
+Lag 0    1.00000000  1.00000000  1.00000000  1.0000000000
+Lag 10   0.47982627  0.53563242  0.44046736  0.1782257675
+Lag 50   0.19267085  0.03187660  0.02889982  0.0063904340
+Lag 100  0.14690201  0.02796076 -0.04444465 -0.0284574725
+Lag 500 -0.01932353 -0.03363773  0.02311577 -0.0006837062
+
+[[5]]
+                 logL        Fst1         Fst2         Fst3
+Lag 0    1.0000000000 1.000000000  1.000000000  1.000000000
+Lag 10   0.5318801061 0.680466030  0.230483966  0.198954135
+Lag 50   0.1421256128 0.160037012 -0.027610951 -0.007210034
+Lag 100 -0.0005721923 0.012659763  0.004435264 -0.014841260
+Lag 500  0.0346055049 0.002205722  0.021311940 -0.006750357
+
+[[6]]
+               logL         Fst1         Fst2         Fst3         Fst4
+Lag 0    1.00000000  1.000000000  1.000000000  1.000000000  1.000000000
+Lag 10   0.30754007  0.175157107  0.135820405  0.119240412  0.075509832
+Lag 50   0.15120007 -0.015946765  0.008361981 -0.012077166 -0.004939028
+Lag 100  0.08945832  0.002803845 -0.012485848 -0.004798796  0.002304917
+Lag 500 -0.05606252  0.006162458  0.007084026 -0.018229900  0.017125582
+                Fst5          Fst6         Fst7        Fst8         Fst9
+Lag 0    1.000000000  1.0000000000  1.000000000  1.00000000  1.000000000
+Lag 10   0.123286754  0.1825444281  0.132620270  0.22225171  0.114669674
+Lag 50  -0.006582791  0.0050387041 -0.001697224  0.01890867  0.001457232
+Lag 100 -0.022383204 -0.0242565885 -0.023987708 -0.01452887  0.010347987
+Lag 500 -0.024263474  0.0002368038 -0.024605579 -0.00483573 -0.002126659
+
+[[7]]
+               logL        Fst1        Fst2         Fst3
+Lag 0    1.00000000  1.00000000  1.00000000  1.000000000
+Lag 10   0.63809822  0.71929436  0.21938783  0.184705269
+Lag 50   0.24184818  0.26349204  0.01653101 -0.007923912
+Lag 100  0.09412674  0.09105792  0.01764915 -0.002725584
+Lag 500 -0.01792671 -0.01773352 -0.01943419 -0.001414307
+
+[[8]]
+               logL         Fst1          Fst2        Fst3
+Lag 0   1.000000000  1.000000000  1.0000000000  1.00000000
+Lag 10  0.647906769  0.719837948  0.2274409141  0.16993596
+Lag 50  0.217223717  0.229768075  0.0136407874 -0.00271750
+Lag 100 0.024359055  0.025138742  0.0005699158  0.01821014
+Lag 500 0.007870321 -0.009631092 -0.0092647520  0.01163720
+
+[[9]]
+              logL         Fst1        Fst2        Fst3
+Lag 0   1.00000000  1.000000000  1.00000000  1.00000000
+Lag 10  0.40248298  0.476002400  0.47349169  0.28723403
+Lag 50  0.13284058  0.086379959  0.07755878  0.02912931
+Lag 100 0.08276119 -0.001562839  0.04936645  0.01777984
+Lag 500 0.02070514 -0.044046591 -0.05338927 -0.01229990
+
 
 effectiveSize(chain) ##check that this is close to the sample size (here 5000). If there is correlation (chain got stuck) the sample size will be much smaller than the input
 
