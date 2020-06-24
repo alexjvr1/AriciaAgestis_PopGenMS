@@ -26,8 +26,8 @@ bluecp3:/newhome/aj18951/1a_Aricia_agestis_PopGenomics/Bayescan
 
 All output files were copied back to the mac location above and checked for convergence using R.
 
-Below is the basic script and then I show the output for each of the runs. 
 
+#### Convergence in HostPlant runs
 ```
 source("plot_R.r")
 library(coda)
@@ -54,18 +54,16 @@ Sample size per chain = 4999
    plus standard error of the mean:
 
            Mean        SD  Naive SE Time-series SE
-logL -2.833e+05 1.742e+02 2.463e+00      4.648e+00
-Fst1  2.000e-02 2.981e-04 4.216e-06      6.999e-06
-Fst2  2.024e-02 3.168e-04 4.481e-06      7.645e-06
-Fst3  2.354e-02 4.903e-04 6.934e-06      9.587e-06
+logL -2.168e+05 2.290e+02 3.239e+00      6.919e+00
+Fst1  1.425e-02 3.486e-04 4.930e-06      1.144e-05
+Fst2  3.224e-02 4.222e-04 5.971e-06      9.350e-06
 
 2. Quantiles for each variable:
 
            2.5%        25%        50%        75%      97.5%
-logL -2.836e+05 -2.834e+05 -2.833e+05 -2.832e+05 -2.830e+05
-Fst1  1.942e-02  1.979e-02  2.000e-02  2.020e-02  2.057e-02
-Fst2  1.964e-02  2.002e-02  2.024e-02  2.046e-02  2.087e-02
-Fst3  2.258e-02  2.321e-02  2.352e-02  2.386e-02  2.450e-02
+logL -2.172e+05 -2.169e+05 -2.168e+05 -2.166e+05 -2.164e+05
+Fst1  1.358e-02  1.402e-02  1.425e-02  1.448e-02  1.496e-02
+Fst2  3.143e-02  3.195e-02  3.223e-02  3.252e-02  3.306e-02
 
 
 [[2]]
@@ -79,18 +77,16 @@ Sample size per chain = 4999
    plus standard error of the mean:
 
            Mean        SD  Naive SE Time-series SE
-logL -2.788e+05 2.810e+02 3.975e+00      1.171e+01
-Fst1  1.936e-03 1.571e-04 2.221e-06      6.541e-06
-Fst2  2.577e-02 2.850e-04 4.031e-06      5.098e-06
-Fst3  3.280e-02 4.276e-04 6.048e-06      7.000e-06
+logL -2.008e+05 2.643e+02 3.739e+00      1.095e+01
+Fst1  5.762e-03 2.477e-04 3.504e-06      1.122e-05
+Fst2  2.194e-02 3.036e-04 4.295e-06      7.621e-06
 
 2. Quantiles for each variable:
 
            2.5%        25%        50%        75%      97.5%
-logL -2.794e+05 -2.790e+05 -2.788e+05 -2.787e+05 -2.783e+05
-Fst1  1.633e-03  1.827e-03  1.932e-03  2.046e-03  2.240e-03
-Fst2  2.521e-02  2.557e-02  2.577e-02  2.596e-02  2.631e-02
-Fst3  3.197e-02  3.251e-02  3.280e-02  3.309e-02  3.367e-02
+logL -2.013e+05 -2.010e+05 -2.008e+05 -2.007e+05 -2.003e+05
+Fst1  5.266e-03  5.599e-03  5.766e-03  5.927e-03  6.243e-03
+Fst2  2.133e-02  2.173e-02  2.194e-02  2.214e-02  2.252e-02
 
 
 [[3]]
@@ -104,18 +100,16 @@ Sample size per chain = 4999
    plus standard error of the mean:
 
            Mean        SD  Naive SE Time-series SE
-logL -2.687e+05 1.870e+02 2.645e+00      4.990e+00
-Fst1  1.221e-02 2.503e-04 3.540e-06      7.939e-06
-Fst2  1.999e-02 3.118e-04 4.410e-06      7.794e-06
-Fst3  4.650e-02 8.292e-04 1.173e-05      1.373e-05
+logL -2.094e+05 2.928e+02 4.141e+00      1.286e+01
+Fst1  7.119e-03 2.606e-04 3.685e-06      1.233e-05
+Fst2  2.743e-02 3.542e-04 5.009e-06      8.022e-06
 
 2. Quantiles for each variable:
 
            2.5%        25%        50%        75%      97.5%
-logL -2.691e+05 -2.688e+05 -2.687e+05 -2.686e+05 -2.683e+05
-Fst1  1.172e-02  1.204e-02  1.221e-02  1.238e-02  1.270e-02
-Fst2  1.937e-02  1.978e-02  1.999e-02  2.020e-02  2.060e-02
-Fst3  4.488e-02  4.594e-02  4.649e-02  4.705e-02  4.813e-02
+logL -2.100e+05 -2.096e+05 -2.094e+05 -2.092e+05 -2.088e+05
+Fst1  6.603e-03  6.947e-03  7.121e-03  7.293e-03  7.635e-03
+Fst2  2.673e-02  2.719e-02  2.743e-02  2.766e-02  2.811e-02
 
 
 [[4]]
@@ -129,18 +123,16 @@ Sample size per chain = 4999
    plus standard error of the mean:
 
            Mean        SD  Naive SE Time-series SE
-logL -2.749e+05 1.961e+02 2.773e+00      8.232e+00
-Fst1  1.568e-02 2.756e-04 3.899e-06      7.408e-06
-Fst2  2.187e-02 3.282e-04 4.641e-06      7.805e-06
-Fst3  4.050e-02 7.626e-04 1.079e-05      1.379e-05
+logL -2.156e+05 2.478e+02 3.505e+00      1.020e+01
+Fst1  1.071e-02 2.983e-04 4.218e-06      1.171e-05
+Fst2  3.026e-02 3.911e-04 5.532e-06      8.740e-06
 
 2. Quantiles for each variable:
 
            2.5%        25%        50%        75%      97.5%
-logL -2.753e+05 -2.750e+05 -2.749e+05 -2.748e+05 -2.745e+05
-Fst1  1.516e-02  1.550e-02  1.567e-02  1.587e-02  1.623e-02
-Fst2  2.122e-02  2.165e-02  2.186e-02  2.209e-02  2.250e-02
-Fst3  3.903e-02  3.997e-02  4.050e-02  4.101e-02  4.198e-02
+logL -2.161e+05 -2.158e+05 -2.156e+05 -2.155e+05 -2.152e+05
+Fst1  1.014e-02  1.051e-02  1.071e-02  1.091e-02  1.131e-02
+Fst2  2.950e-02  3.000e-02  3.027e-02  3.053e-02  3.101e-02
 
 
 [[5]]
@@ -154,18 +146,16 @@ Sample size per chain = 4999
    plus standard error of the mean:
 
            Mean        SD  Naive SE Time-series SE
-logL -2.814e+05 2.085e+02 2.949e+00      6.342e+00
-Fst1  9.561e-03 2.312e-04 3.270e-06      7.597e-06
-Fst2  3.525e-02 4.045e-04 5.721e-06      7.428e-06
-Fst3  3.195e-02 4.988e-04 7.055e-06      8.814e-06
+logL -2.066e+05 3.785e+02 5.353e+00      2.129e+01
+Fst1  6.740e-03 3.107e-04 4.394e-06      1.788e-05
+Fst2  3.852e-02 4.296e-04 6.076e-06      8.032e-06
 
 2. Quantiles for each variable:
 
            2.5%        25%        50%        75%      97.5%
-logL -2.819e+05 -2.816e+05 -2.814e+05 -2.813e+05 -2.810e+05
-Fst1  9.107e-03  9.404e-03  9.563e-03  9.718e-03  1.001e-02
-Fst2  3.445e-02  3.498e-02  3.525e-02  3.552e-02  3.604e-02
-Fst3  3.098e-02  3.161e-02  3.194e-02  3.229e-02  3.293e-02
+logL -2.073e+05 -2.068e+05 -2.066e+05 -2.063e+05 -2.057e+05
+Fst1  6.080e-03  6.544e-03  6.753e-03  6.949e-03  7.314e-03
+Fst2  3.767e-02  3.823e-02  3.852e-02  3.881e-02  3.937e-02
 
 
 [[6]]
@@ -179,30 +169,16 @@ Sample size per chain = 4999
    plus standard error of the mean:
 
            Mean        SD  Naive SE Time-series SE
-logL -6.340e+05 1.597e+02 2.259e+00      5.358e+00
-Fst1  2.319e-02 4.249e-04 6.010e-06      7.174e-06
-Fst2  3.854e-02 4.655e-04 6.584e-06      7.549e-06
-Fst3  4.274e-02 7.396e-04 1.046e-05      1.179e-05
-Fst4  3.726e-02 6.733e-04 9.523e-06      1.027e-05
-Fst5  3.167e-02 4.626e-04 6.543e-06      6.904e-06
-Fst6  3.016e-02 5.233e-04 7.402e-06      9.156e-06
-Fst7  3.015e-02 4.051e-04 5.729e-06      6.548e-06
-Fst8  2.915e-02 4.103e-04 5.803e-06      7.587e-06
-Fst9  4.382e-02 6.342e-04 8.970e-06      1.007e-05
+logL -2.093e+05 2.554e+02 3.612e+00      1.005e+01
+Fst1  7.862e-03 2.659e-04 3.761e-06      1.171e-05
+Fst2  2.470e-02 3.430e-04 4.851e-06      8.245e-06
 
 2. Quantiles for each variable:
 
            2.5%        25%        50%        75%      97.5%
-logL -6.343e+05 -6.341e+05 -6.340e+05 -6.339e+05 -6.337e+05
-Fst1  2.238e-02  2.291e-02  2.319e-02  2.347e-02  2.402e-02
-Fst2  3.764e-02  3.822e-02  3.852e-02  3.885e-02  3.946e-02
-Fst3  4.132e-02  4.224e-02  4.273e-02  4.323e-02  4.421e-02
-Fst4  3.595e-02  3.679e-02  3.726e-02  3.770e-02  3.859e-02
-Fst5  3.075e-02  3.137e-02  3.167e-02  3.199e-02  3.259e-02
-Fst6  2.911e-02  2.981e-02  3.017e-02  3.052e-02  3.117e-02
-Fst7  2.936e-02  2.987e-02  3.015e-02  3.042e-02  3.093e-02
-Fst8  2.835e-02  2.889e-02  2.915e-02  2.942e-02  2.998e-02
-Fst9  4.258e-02  4.340e-02  4.382e-02  4.423e-02  4.509e-02
+logL -2.098e+05 -2.095e+05 -2.093e+05 -2.091e+05 -2.088e+05
+Fst1  7.341e-03  7.686e-03  7.863e-03  8.043e-03  8.381e-03
+Fst2  2.402e-02  2.447e-02  2.470e-02  2.493e-02  2.538e-02
 
 
 [[7]]
@@ -216,18 +192,16 @@ Sample size per chain = 4999
    plus standard error of the mean:
 
            Mean        SD  Naive SE Time-series SE
-logL -2.796e+05 2.404e+02 3.399e+00      9.307e+00
-Fst1  3.169e-03 1.652e-04 2.337e-06      6.216e-06
-Fst2  2.681e-02 2.959e-04 4.185e-06      5.371e-06
-Fst3  2.434e-02 3.630e-04 5.134e-06      6.190e-06
+logL -2.060e+05 2.921e+02 4.131e+00      1.357e+01
+Fst1  6.903e-03 2.592e-04 3.665e-06      1.326e-05
+Fst2  2.586e-02 3.433e-04 4.856e-06      7.616e-06
 
 2. Quantiles for each variable:
 
            2.5%        25%        50%        75%      97.5%
-logL -2.801e+05 -2.797e+05 -2.796e+05 -2.794e+05 -2.791e+05
-Fst1  2.848e-03  3.059e-03  3.165e-03  3.280e-03  3.496e-03
-Fst2  2.624e-02  2.661e-02  2.681e-02  2.701e-02  2.739e-02
-Fst3  2.362e-02  2.410e-02  2.434e-02  2.458e-02  2.505e-02
+logL -2.065e+05 -2.062e+05 -2.060e+05 -2.058e+05 -2.054e+05
+Fst1  6.393e-03  6.726e-03  6.900e-03  7.076e-03  7.412e-03
+Fst2  2.519e-02  2.563e-02  2.587e-02  2.610e-02  2.651e-02
 
 
 [[8]]
@@ -241,18 +215,16 @@ Sample size per chain = 4999
    plus standard error of the mean:
 
            Mean        SD  Naive SE Time-series SE
-logL -2.796e+05 2.421e+02 3.423e+00      8.676e+00
-Fst1  3.171e-03 1.634e-04 2.312e-06      6.105e-06
-Fst2  2.681e-02 3.008e-04 4.255e-06      5.363e-06
-Fst3  2.435e-02 3.588e-04 5.074e-06      6.024e-06
+logL -2.032e+05 2.414e+02 3.415e+00      8.522e+00
+Fst1  7.210e-03 2.537e-04 3.588e-06      9.632e-06
+Fst2  2.292e-02 3.176e-04 4.491e-06      7.183e-06
 
 2. Quantiles for each variable:
 
            2.5%        25%        50%        75%      97.5%
-logL -2.800e+05 -2.797e+05 -2.796e+05 -2.794e+05 -2.791e+05
-Fst1  2.844e-03  3.063e-03  3.170e-03  3.280e-03  3.488e-03
-Fst2  2.623e-02  2.661e-02  2.681e-02  2.701e-02  2.740e-02
-Fst3  2.363e-02  2.411e-02  2.435e-02  2.458e-02  2.505e-02
+logL -2.037e+05 -2.034e+05 -2.032e+05 -2.031e+05 -2.028e+05
+Fst1  6.701e-03  7.036e-03  7.212e-03  7.383e-03  7.698e-03
+Fst2  2.230e-02  2.271e-02  2.292e-02  2.314e-02  2.355e-02
 
 
 [[9]]
@@ -266,110 +238,350 @@ Sample size per chain = 4999
    plus standard error of the mean:
 
            Mean        SD  Naive SE Time-series SE
-logL -2.798e+05 1.810e+02 2.560e+00      6.634e+00
-Fst1  1.539e-02 2.372e-04 3.355e-06      6.229e-06
-Fst2  1.111e-02 2.574e-04 3.641e-06      7.315e-06
-Fst3  2.831e-02 4.430e-04 6.266e-06      9.277e-06
+logL -1.986e+05 3.067e+02 4.338e+00      1.464e+01
+Fst1  6.674e-03 2.607e-04 3.688e-06      1.294e-05
+Fst2  2.385e-02 3.519e-04 4.977e-06      7.272e-06
 
 2. Quantiles for each variable:
 
            2.5%        25%        50%        75%      97.5%
-logL -2.801e+05 -2.799e+05 -2.798e+05 -2.796e+05 -2.794e+05
-Fst1  1.493e-02  1.523e-02  1.539e-02  1.555e-02  1.585e-02
-Fst2  1.062e-02  1.094e-02  1.111e-02  1.129e-02  1.163e-02
-Fst3  2.746e-02  2.802e-02  2.830e-02  2.860e-02  2.919e-02
+logL -1.992e+05 -1.988e+05 -1.986e+05 -1.984e+05 -1.980e+05
+Fst1  6.160e-03  6.503e-03  6.676e-03  6.847e-03  7.185e-03
+Fst2  2.318e-02  2.362e-02  2.386e-02  2.409e-02  2.455e-02
+
+
 
 
 lapply(chain.list2, FUN=autocorr.diag) ## check correlation between the chains. Make sure the chains didn't get stuck
 
 [[1]]
-              logL         Fst1          Fst2         Fst3
-Lag 0   1.00000000  1.000000000  1.0000000000  1.000000000
-Lag 10  0.35879059  0.439258636  0.4242972940  0.262232919
-Lag 50  0.05682607  0.006679864  0.0256075076 -0.006724698
-Lag 100 0.05947839  0.010046353 -0.0009297211 -0.023233594
-Lag 500 0.01048752 -0.017819082 -0.0210263390 -0.001227658
+              logL        Fst1        Fst2
+Lag 0   1.00000000  1.00000000 1.000000000
+Lag 10  0.56800955  0.67590491 0.394071573
+Lag 50  0.12720325  0.14820342 0.014677900
+Lag 100 0.02159118  0.02354217 0.012449969
+Lag 500 0.01773224 -0.01976560 0.004944996
 
 [[2]]
-               logL       Fst1        Fst2         Fst3
-Lag 0    1.00000000  1.0000000  1.00000000  1.000000000
-Lag 10   0.71855202  0.7675045  0.20975756  0.145075690
-Lag 50   0.31740046  0.3288519  0.01258458  0.016225844
-Lag 100  0.13600598  0.1117953 -0.01110589  0.001941376
-Lag 500 -0.01913684 -0.0464415 -0.01686811 -0.004592267
+              logL        Fst1       Fst2
+Lag 0    1.0000000  1.00000000 1.00000000
+Lag 10   0.6936183  0.79870670 0.37481666
+Lag 50   0.3177420  0.39017426 0.07753509
+Lag 100  0.1067440  0.12036158 0.02844436
+Lag 500 -0.0460013 -0.02283632 0.01330113
 
 [[3]]
-              logL        Fst1         Fst2         Fst3
-Lag 0   1.00000000  1.00000000  1.000000000  1.000000000
-Lag 10  0.43870812  0.64665404  0.415211032  0.156317962
-Lag 50  0.08466230  0.12428070  0.071746556  0.003899578
-Lag 100 0.04768748  0.02117960 -0.002528637  0.011028265
-Lag 500 0.01661087 -0.01103629  0.004492814 -0.011816068
+              logL       Fst1        Fst2
+Lag 0   1.00000000 1.00000000 1.000000000
+Lag 10  0.74707053 0.81280349 0.342853161
+Lag 50  0.35019147 0.40601093 0.049979821
+Lag 100 0.15226780 0.17802480 0.023412738
+Lag 500 0.04120643 0.03539824 0.007047709
 
 [[4]]
-               logL        Fst1        Fst2          Fst3
-Lag 0    1.00000000  1.00000000  1.00000000  1.0000000000
-Lag 10   0.47982627  0.53563242  0.44046736  0.1782257675
-Lag 50   0.19267085  0.03187660  0.02889982  0.0063904340
-Lag 100  0.14690201  0.02796076 -0.04444465 -0.0284574725
-Lag 500 -0.01932353 -0.03363773  0.02311577 -0.0006837062
+              logL        Fst1         Fst2
+Lag 0   1.00000000 1.000000000  1.000000000
+Lag 10  0.64799350 0.742070542  0.352212163
+Lag 50  0.28462854 0.298925328  0.020806084
+Lag 100 0.15465155 0.131561137  0.004264198
+Lag 500 0.05216104 0.008475711 -0.017339171
 
 [[5]]
-                 logL        Fst1         Fst2         Fst3
-Lag 0    1.0000000000 1.000000000  1.000000000  1.000000000
-Lag 10   0.5318801061 0.680466030  0.230483966  0.198954135
-Lag 50   0.1421256128 0.160037012 -0.027610951 -0.007210034
-Lag 100 -0.0005721923 0.012659763  0.004435264 -0.014841260
-Lag 500  0.0346055049 0.002205722  0.021311940 -0.006750357
+             logL        Fst1        Fst2
+Lag 0   1.0000000  1.00000000 1.000000000
+Lag 10  0.8462657  0.87507095 0.240413108
+Lag 50  0.5193292  0.53451868 0.007650818
+Lag 100 0.2817936  0.28072436 0.016306999
+Lag 500 0.0019667 -0.01011113 0.003277941
 
 [[6]]
-               logL         Fst1         Fst2         Fst3         Fst4
-Lag 0    1.00000000  1.000000000  1.000000000  1.000000000  1.000000000
-Lag 10   0.30754007  0.175157107  0.135820405  0.119240412  0.075509832
-Lag 50   0.15120007 -0.015946765  0.008361981 -0.012077166 -0.004939028
-Lag 100  0.08945832  0.002803845 -0.012485848 -0.004798796  0.002304917
-Lag 500 -0.05606252  0.006162458  0.007084026 -0.018229900  0.017125582
-                Fst5          Fst6         Fst7        Fst8         Fst9
-Lag 0    1.000000000  1.0000000000  1.000000000  1.00000000  1.000000000
-Lag 10   0.123286754  0.1825444281  0.132620270  0.22225171  0.114669674
-Lag 50  -0.006582791  0.0050387041 -0.001697224  0.01890867  0.001457232
-Lag 100 -0.022383204 -0.0242565885 -0.023987708 -0.01452887  0.010347987
-Lag 500 -0.024263474  0.0002368038 -0.024605579 -0.00483573 -0.002126659
+              logL       Fst1         Fst2
+Lag 0   1.00000000 1.00000000  1.000000000
+Lag 10  0.67389573 0.77823832  0.376241083
+Lag 50  0.29606666 0.33904165  0.076996034
+Lag 100 0.10348853 0.09034977  0.030847739
+Lag 500 0.03234373 0.03458971 -0.007191973
 
 [[7]]
-               logL        Fst1        Fst2         Fst3
-Lag 0    1.00000000  1.00000000  1.00000000  1.000000000
-Lag 10   0.63809822  0.71929436  0.21938783  0.184705269
-Lag 50   0.24184818  0.26349204  0.01653101 -0.007923912
-Lag 100  0.09412674  0.09105792  0.01764915 -0.002725584
-Lag 500 -0.01792671 -0.01773352 -0.01943419 -0.001414307
+              logL        Fst1          Fst2
+Lag 0   1.00000000 1.000000000  1.0000000000
+Lag 10  0.75146247 0.831401698  0.3050945606
+Lag 50  0.38828864 0.459328537  0.0321693396
+Lag 100 0.19187169 0.234681480  0.0127852193
+Lag 500 0.01176107 0.003212293 -0.0005214924
 
 [[8]]
-               logL         Fst1          Fst2        Fst3
-Lag 0   1.000000000  1.000000000  1.0000000000  1.00000000
-Lag 10  0.647906769  0.719837948  0.2274409141  0.16993596
-Lag 50  0.217223717  0.229768075  0.0136407874 -0.00271750
-Lag 100 0.024359055  0.025138742  0.0005699158  0.01821014
-Lag 500 0.007870321 -0.009631092 -0.0092647520  0.01163720
+              logL          Fst1       Fst2
+Lag 0   1.00000000  1.0000000000 1.00000000
+Lag 10  0.62698911  0.7358283663 0.35166875
+Lag 50  0.20982609  0.2535272640 0.01279134
+Lag 100 0.04147760  0.0225803018 0.01705611
+Lag 500 0.02464307 -0.0006297397 0.01551634
 
 [[9]]
-              logL         Fst1        Fst2        Fst3
-Lag 0   1.00000000  1.000000000  1.00000000  1.00000000
-Lag 10  0.40248298  0.476002400  0.47349169  0.28723403
-Lag 50  0.13284058  0.086379959  0.07755878  0.02912931
-Lag 100 0.08276119 -0.001562839  0.04936645  0.01777984
-Lag 500 0.02070514 -0.044046591 -0.05338927 -0.01229990
+              logL        Fst1       Fst2
+Lag 0   1.00000000 1.000000000 1.00000000
+Lag 10  0.76887794 0.833592962 0.33341760
+Lag 50  0.40645595 0.433200379 0.03637108
+Lag 100 0.20727402 0.187595237 0.03869517
+Lag 500 0.01360352 0.001494199 0.00856358
 
 
-effectiveSize(chain) ##check that this is close to the sample size (here 5000). If there is correlation (chain got stuck) the sample size will be much smaller than the input
 
-geweke.diag(chain, frac1=0.1, frac2=0.5)  ##The diagnostic reports the z-scores for each parameter. For example, with α = 0.05, the critical values of z are – 1.96 and +1.96. We reject H0 (equality of means => convergence) if z < -1.96 or z > +1.96.
+lapply(chain.list2, FUN=effectiveSize) ##check that this is close to the sample size (here 5000). If there is correlation (chain got stuck) the sample size will be much smaller than the input
 
-heidel.diag(chain, eps=0.1, pvalue=0.05) ##another test whether the chains have reached stationarity. 
+[[1]]
+     logL      Fst1      Fst2 
+1095.3806  928.5767 2038.6205 
+
+[[2]]
+     logL      Fst1      Fst2 
+ 583.1613  487.2996 1587.5580 
+
+[[3]]
+     logL      Fst1      Fst2 
+ 518.8199  446.4715 1949.1681 
+
+[[4]]
+     logL      Fst1      Fst2 
+ 589.7287  648.2361 2002.4008 
+
+[[5]]
+     logL      Fst1      Fst2 
+ 316.0541  301.8809 2861.3097 
+
+[[6]]
+     logL      Fst1      Fst2 
+ 646.0583  515.5124 1730.7753 
+
+[[7]]
+     logL      Fst1      Fst2 
+ 463.0152  382.1190 2032.0718 
+
+[[8]]
+     logL      Fst1      Fst2 
+ 802.6942  693.8763 1954.3704 
+
+[[9]]
+     logL      Fst1      Fst2 
+ 439.1987  406.0481 2341.0720 
+
+
+lapply(chain.list2, FUN=geweke.diag, frac1=0.1, frac2=0.5)  ##The diagnostic reports the z-scores for each parameter. For example, with α = 0.05, the critical values of z are – 1.96 and +1.96. We reject H0 (equality of means => convergence) if z < -1.96 or z > +1.96.
+
+[[1]]
+
+Fraction in 1st window = 0.1
+Fraction in 2nd window = 0.5 
+
+  logL   Fst1   Fst2 
+ 2.237 -2.068 -0.055 
+
+
+[[2]]
+
+Fraction in 1st window = 0.1
+Fraction in 2nd window = 0.5 
+
+   logL    Fst1    Fst2 
+-1.7218  1.3774 -0.7938 
+
+
+[[3]]
+
+Fraction in 1st window = 0.1
+Fraction in 2nd window = 0.5 
+
+    logL     Fst1     Fst2 
+ 0.14037 -0.01837 -0.03359 
+
+
+[[4]]
+
+Fraction in 1st window = 0.1
+Fraction in 2nd window = 0.5 
+
+    logL     Fst1     Fst2 
+-0.44444  0.04872 -0.16142 
+
+
+[[5]]
+
+Fraction in 1st window = 0.1
+Fraction in 2nd window = 0.5 
+
+   logL    Fst1    Fst2 
+ 0.1287 -0.3102  1.7096 
+
+
+[[6]]
+
+Fraction in 1st window = 0.1
+Fraction in 2nd window = 0.5 
+
+    logL     Fst1     Fst2 
+-1.03023  0.99671 -0.06885 
+
+
+[[7]]
+
+Fraction in 1st window = 0.1
+Fraction in 2nd window = 0.5 
+
+    logL     Fst1     Fst2 
+-0.40669  0.42772 -0.02636 
+
+
+[[8]]
+
+Fraction in 1st window = 0.1
+Fraction in 2nd window = 0.5 
+
+   logL    Fst1    Fst2 
+-2.0594  1.3487 -0.7512 
+
+
+[[9]]
+
+Fraction in 1st window = 0.1
+Fraction in 2nd window = 0.5 
+
+   logL    Fst1    Fst2 
+-0.9685  0.2358  0.5333 
+
+
+lapply(chain.list2, FUN=heidel.diag, eps=0.1, pvalue=0.05) ##another test whether the chains have reached stationarity. 
+
+[[1]]
+                                   
+     Stationarity start     p-value
+     test         iteration        
+logL passed         1       0.0543 
+Fst1 passed       501       0.2424 
+Fst2 passed         1       0.3285 
+                                  
+     Halfwidth Mean      Halfwidth
+     test                         
+logL passed    -2.17e+05 1.36e+01 
+Fst1 passed     1.43e-02 2.28e-05 
+Fst2 passed     3.22e-02 1.83e-05 
+
+[[2]]
+                                   
+     Stationarity start     p-value
+     test         iteration        
+logL passed       1         0.58   
+Fst1 passed       1         0.59   
+Fst2 passed       1         0.93   
+                                  
+     Halfwidth Mean      Halfwidth
+     test                         
+logL passed    -2.01e+05 2.15e+01 
+Fst1 passed     5.76e-03 2.20e-05 
+Fst2 passed     2.19e-02 1.49e-05 
+
+[[3]]
+                                   
+     Stationarity start     p-value
+     test         iteration        
+logL passed       1         0.530  
+Fst1 passed       1         0.851  
+Fst2 passed       1         0.374  
+                                  
+     Halfwidth Mean      Halfwidth
+     test                         
+logL passed    -2.09e+05 2.52e+01 
+Fst1 passed     7.12e-03 2.42e-05 
+Fst2 passed     2.74e-02 1.57e-05 
+
+[[4]]
+                                   
+     Stationarity start     p-value
+     test         iteration        
+logL passed       1         0.298  
+Fst1 passed       1         0.824  
+Fst2 passed       1         0.762  
+                                  
+     Halfwidth Mean      Halfwidth
+     test                         
+logL passed    -2.16e+05 2.00e+01 
+Fst1 passed     1.07e-02 2.30e-05 
+Fst2 passed     3.03e-02 1.71e-05 
+
+[[5]]
+                                   
+     Stationarity start     p-value
+     test         iteration        
+logL passed          1      0.6609 
+Fst1 passed          1      0.4933 
+Fst2 passed       1001      0.0702 
+                                  
+     Halfwidth Mean      Halfwidth
+     test                         
+logL passed    -2.07e+05 4.17e+01 
+Fst1 passed     6.74e-03 3.50e-05 
+Fst2 passed     3.85e-02 1.76e-05 
+
+[[6]]
+                                   
+     Stationarity start     p-value
+     test         iteration        
+logL passed       1         0.210  
+Fst1 passed       1         0.269  
+Fst2 passed       1         0.704  
+                                  
+     Halfwidth Mean      Halfwidth
+     test                         
+logL passed    -2.09e+05 1.97e+01 
+Fst1 passed     7.86e-03 2.30e-05 
+Fst2 passed     2.47e-02 1.62e-05 
+
+[[7]]
+                                   
+     Stationarity start     p-value
+     test         iteration        
+logL passed       1         0.253  
+Fst1 passed       1         0.303  
+Fst2 passed       1         0.756  
+                                  
+     Halfwidth Mean      Halfwidth
+     test                         
+logL passed    -2.06e+05 2.66e+01 
+Fst1 passed     6.90e-03 2.60e-05 
+Fst2 passed     2.59e-02 1.49e-05 
+
+[[8]]
+                                   
+     Stationarity start     p-value
+     test         iteration        
+logL passed       1         0.282  
+Fst1 passed       1         0.724  
+Fst2 passed       1         0.937  
+                                  
+     Halfwidth Mean      Halfwidth
+     test                         
+logL passed    -2.03e+05 1.67e+01 
+Fst1 passed     7.21e-03 1.89e-05 
+Fst2 passed     2.29e-02 1.41e-05 
+
+[[9]]
+                                   
+     Stationarity start     p-value
+     test         iteration        
+logL passed       1         0.806  
+Fst1 passed       1         0.705  
+Fst2 passed       1         0.854  
+                                  
+     Halfwidth Mean      Halfwidth
+     test                         
+logL passed    -1.99e+05 2.87e+01 
+Fst1 passed     6.67e-03 2.54e-05 
+Fst2 passed     2.39e-02 1.43e-05 
+
 ```
 
 
-### Check for Convergence: Col Hist
+#### Check for Convergence: Col Hist
 
 ```
 source("plot_R.r")
@@ -925,11 +1137,6 @@ Fst2 passed     1.10e-02 2.79e-05
 
 
 
-### Check for Convergence: Host Plant
-
-
-
-
 ## Identify Outliers
 
 #### ColHist
@@ -1044,4 +1251,101 @@ integer(0)
 
 ### Outliers: Host Plant
 
+```
+temp <- list.files(pattern="*fst.txt")
+HostPlant.Results <- lapply(temp, FUN=read.table, header=T)
+summary(HostPlant.Results)
+      Length Class      Mode
+ [1,] 5      data.frame list
+ [2,] 5      data.frame list
+ [3,] 5      data.frame list
+ [4,] 5      data.frame list
+ [5,] 5      data.frame list
+ [6,] 5      data.frame list
+ [7,] 5      data.frame list
+ [8,] 5      data.frame list
+ [9,] 5      data.frame list
 
+
+##Find the intersection between all the outliers listed: 
+##First strict FDR: 0.01
+pdf("HostPlant.JAKKNIFE.outliers.pdf")
+HostPlant.outliers <- lapply(HostPlant.Results, FUN=plot_bayescan, FDR=0.01, add_text=T)
+dev.off()
+
+ls <- vector("list", 9)
+for (i in 1:9) ls[[i]] <- (HostPlant.outliers[[i]]$outlier)
+Reduce(intersect, ls)
+
+ls
+
+[[1]]
+[1] 11041 11042 11050 17001
+
+[[2]]
+[1] 11041 11042 11050 12108 16942 17001
+
+[[3]]
+[1] 11041 11042 11050 12108 16942 16943 17001 23187
+
+[[4]]
+[1] 11041 11042 11050 13357 13359 17001 21378
+
+[[5]]
+[1] 11041 11042 11050 13829 17001 28329
+
+[[6]]
+[1] 11041 11042 11050 12108 17001
+
+[[7]]
+[1]  4004 11041 11042 11050 12108 17001
+
+[[8]]
+[1] 11041 11042 11050 17001 17077
+
+[[9]]
+[1]  2072 10676 12108
+
+
+>integer(0) ##I found no overlap between outliers when single populations are removed. 
+
+## FDR: 0.05
+HostPlant.outliers <- lapply(HostPlant.Results, FUN=plot_bayescan, FDR=0.05, add_text=T)
+ls <- vector("list", 9)
+for (i in 1:9) ls[[i]] <- HostPlant.outliers[[i]]$outliers
+
+
+[[1]]
+ [1] 11041 11042 11050 17001 21375 21377 21378 21379 22361 28329 28726
+
+[[2]]
+ [1]  2072 11041 11042 11050 12108 16942 16943 17001 21375 21377 21378 29430
+
+[[3]]
+ [1]  2072 11041 11042 11050 12108 13625 13829 16942 16943 17001 21378 23187
+[13] 24054 28329
+
+[[4]]
+ [1]  2072 11041 11042 11050 12108 13357 13359 13829 17001 21375 21377 21378
+[13] 21379 23185 26646
+
+[[5]]
+ [1]  4992  9287 11041 11042 11050 13357 13359 13829 17001 17082 22361 24468
+[13] 28329 28726 28728
+
+[[6]]
+ [1]  4992 11041 11042 11050 12108 16942 16943 17001 17082 21378 26646
+
+[[7]]
+[1]  4004 11041 11042 11050 12108 17001 21377 21378
+
+[[8]]
+[1] 11041 11042 11050 17001 17077 17085 24054 28329 29431
+
+[[9]]
+ [1]  2072  7500 10676 11041 11042 11050 11766 12108 15940 26622
+
+> Reduce(intersect, ls)
+[1] 11041 11042 11050
+
+```
