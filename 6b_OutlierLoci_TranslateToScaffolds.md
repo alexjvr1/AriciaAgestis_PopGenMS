@@ -5,7 +5,7 @@ Summary of the output from each run:
 
 ## Loci
 ```
-###Host Plant
+###Host Plant (7 loci)
 
 #Locus1
 2072  m_scaff_962_19860
@@ -34,7 +34,7 @@ Summary of the output from each run:
 21378 *  contig_3838_3382
 21379    contig_3838_3408
 
-###ColHist
+###ColHist (9 loci)
 
 #Locus8
 10847    contig_4712_1181
@@ -60,7 +60,7 @@ Summary of the output from each run:
 #Locus12
 27882     contig_18281_3083
 
-#Locus12
+#Locus13
 28329     contig_1883_23537
 
 #Locus14
