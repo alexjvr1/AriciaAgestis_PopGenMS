@@ -3,32 +3,34 @@
 
 Summary of the output from each run: 
 
-## Loci
+## Loci. 
+
+Linkage groups as in H.melpomone
 ```
 ###Host Plant (7 loci)
 
-#Locus1
-2072  m_scaff_962_19860
+#Locus1: LG 01
+2072  m_scaff_962_19860 
 
-#Locus2
-10676 contig_11951_10614
+#Locus2: LG NA
+10676 contig_11951_10614  
 
-#Locus3 **Also found in  Col Hist +++Final Loci in Host Plant Jackknife test
+#Locus3: LG NA **Also found in  Col Hist +++Final Loci in Host Plant Jackknife test
 11041 * +++   contig_5345_510
 11042 +++     contig_5345_511
 11050 * +++   contig_5345_587
 
 
-#Locus4
+#Locus4: LG NA
 12108  contig_17378_3882
 
-#Locus5
+#Locus5: LG NA
 16942 contig_5407_5785
 
-#Locus6
+#Locus6: LG NA
 17001 contig_19343_4711
 
-#Locus7 **Also found in  Col Hist
+#Locus7: LG NA **Also found in  Col Hist
 21375 *  contig_3838_3376
 21377    contig_3838_3378
 21378 *  contig_3838_3382
@@ -36,34 +38,34 @@ Summary of the output from each run:
 
 ###ColHist (9 loci)
 
-#Locus8
+#Locus8: LG NA
 10847    contig_4712_1181
 
-#Locus3 **Also found in  HostPlant (Not in ColHist Jackknife test)
+#Locus3: LG NA  **Also found in  HostPlant (Not in ColHist Jackknife test)
 11041 *   contig_5345_510
 11050 *   contig_5345_587
 
-#Locus9
+#Locus9: LG NA
 12957     contig_16912_5538
 
-#Locus10
+#Locus10: LG NA
 13829     contig_3360_2654
 13830     contig_3360_2666
 
-#Locus11
+#Locus11: LG NA
 17567     contig_59667_912
 
-#Locus7 **Also found in  HostPlant
+#Locus7: LG NA **Also found in  HostPlant
 21375 *   contig_3838_3376
 21378 *   contig_3838_3382
 
-#Locus12
+#Locus12: LG NA
 27882     contig_18281_3083
 
-#Locus13
+#Locus13: LG NA
 28329     contig_1883_23537
 
-#Locus14
+#Locus14: LG NA
 28726     contig_19564_5748
 28728     contig_19564_5815
 
