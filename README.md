@@ -4,6 +4,16 @@ Data processing and analyses for the manuscript:
 
 De Jong M, Jansen van Rensburg A, Bridle J (20xx) Few genes of large effect underpin specialisation on host plant in the Brown Argus butterfly in the UK. 
 
+##UPDATE##
+
+Since we received the Sanger genome before submitting this work, I have re-analysed these data using the new variants called after mapping to the latest genome available NCBI (www.ncbi.nlm.nih.gov) under accession number GCA_905147365.1
+
+See the latest variant filtering [here](https://github.com/alexjvr1/AriciaAgestis_GWASMS/blob/main/2.VariantFiltering.md)
+
+Note that 14 individuals were removed after assessing relatedness. 
+
+
+
 
 Aims: 
 
