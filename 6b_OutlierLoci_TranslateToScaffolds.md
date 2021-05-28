@@ -1,5 +1,13 @@
 # Converting bayescan results to Loci
 
+
+ddRAD loci were sequenced from 300-450bp insert sizes with 150bp PE reads. So we can definitely reconstruct haplotypes with 300-450bp sequences. 
+
+But can we create longer haplotypes? 
+
+
+## Linked loci 
+
 We're extracting 10kb around each SNP or SNP region identified as outliers to create independent loci for a haplotype network
 
 ```
