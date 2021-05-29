@@ -139,6 +139,15 @@ SUPER_Z	39688283		x	HPCH4
 
 
 
+# We'll use shapeIt
+
+ShapeIt2 has a sequence aware phasing module where individual bam files are used to phase sequences. 
+
+Download and install ShapeIt2 using instructions from [here](https://odelaneau.github.io/shapeit4/#installation) and move to bluecrystal aj18951/Software
+
+
+
+
 
 
 
