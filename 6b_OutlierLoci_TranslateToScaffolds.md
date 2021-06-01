@@ -70,6 +70,28 @@ SUPER_3 11126031-11125804
 ```
 
 
+## Phase using WhatsHap
+
+WhatsHap uses read information from the bam file to phase variants within a given vcf file. This will resolve the phasing of each of the loci of interest plus all the other variants using the prvided bam files. 
+
+[WhatsHap](https://whatshap.readthedocs.io/en/latest/installation.html) instructions
+
+Install in software forlder. WhatsHap needed a really particular version of python (>3.4 < 3.7.0)
+```
+module load languages/python-anaconda2-2019.03.bioconda
+
+conda install -c bioconda/label/cf201901 whatshap
+
+
+```
+
+
+
+
+
+
+# OLD
+
 
 ## Linked loci 
 
