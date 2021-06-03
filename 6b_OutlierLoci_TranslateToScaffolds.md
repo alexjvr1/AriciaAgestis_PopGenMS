@@ -92,10 +92,68 @@ Now we can phase the vcf file for all indivs. Whatshap authors suggest that PE I
 
 Test with 3 indivs
 ```
+#Make sure the indivs in the vcf file have the same name as in the bam folder 
+
+/newhome/aj18951/1a_Aricia_agestis_PopGenomics/WhatsHap
+
+module load apps/bcftools-1.8
+bcftools query -l AA251.FINAL.MAF0.01.missing0.5perpop.vcf > indivnames
+head indivnames
+
+BAR_10_2013
+BAR_11_2014
+BAR_12_2013
+BAR_13_2014
+BAR_14_2013
+BAR_14_2014
+BAR_15_2014
+BAR_17_2014
+BAR_18_2014
+BAR_20_2014
+
+#Change bam file names if necessary (and remember to change the .bai index files too)
+../../software/rename-master/rename 's:_R1_.fastq.gz::g' ../../1a_Aricia_agestis_GWASdata/mapped_ddRAD/*bam
+../../software/rename-master/rename 's:_R1_.fastq.gz::g' ../../1a_Aricia_agestis_GWASdata/mapped_ddRAD/*bam.bai
+
+#Check that the bam files have RG headers that list the same sample names
+module load apps/samtools-1.9.1
+samtools view ../../1a_Aricia_agestis_GWASdata/mapped_ddRAD/BAR_13_2014.bam  |head
+
+´´´
+
+
+#We have no RG information on our samples so we need to add this using [PicardTools](https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-)
+```
+module load apps/picard-2.20.0  
+java -jar /cm/shared/apps/Picard-2.20.0/picard.jar
+
+java -jar /cm/shared/apps/Picard-2.20.0/picard.jar AddOrReplaceReadGroups \
+I=BAR_10_2013.bam \
+O=BAR_10_2013.RG.bam \
+RGID=1 \
+RGLB=lib1 \
+RGPL=Illumina \
+RGPU=unit1 \
+RGSM=BAR_10_2013
+
+#Index file and run Whatshap to test
+module load apps/samtools-1.9.1
+samtools index BAR_10_2013.RG.bam
+
+cd /newhome/aj18951/1a_Aricia_agestis_PopGenomics/WhatsHap/
+
+whatshap phase -o phased.vcf --reference=../../1a_Aricia_agestis_GWASdata/RefGenome/ilAriAges1.1.primary.fa AA251.FINAL.MAF0.01.missing0.5perpop.vcf ../../1a_Aricia_agestis_GWASdata/mapped_ddRAD/BAR_10_2013.RG.bam 
+This is WhatsHap 1.1 running under Python 3.8.5
+
+#This works so we'll set up a script to add RG to all bam files and index them after. 
+´´´
+
+
+Add RG to all bam files
+```
 
 
 ```
-
 
 
 
