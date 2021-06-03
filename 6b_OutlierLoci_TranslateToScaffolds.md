@@ -252,9 +252,14 @@ We currently have a vcf file for each sample, but we need independent vcf files 
 We'll concatenate all the vcf files together, then split by locus. 
 
 ```
+module load apps/bcftools-1.8
 
+ls *phased.vcf > phased_vcf.names
+
+bcftools merge --file-list phased_vcf.names -O v -o AA251_phased_outliers.vcf 
 
 ```
+
 
 4. Copy to mac and convert to Fasta format
 ```
