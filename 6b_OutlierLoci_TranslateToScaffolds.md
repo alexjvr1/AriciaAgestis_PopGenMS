@@ -257,22 +257,56 @@ We'll concatenate all the vcf files together, then split by locus.
 ```
 module load apps/bcftools-1.8
 module load apps/vcftools-0.1.17.2
+module load apps/samtools-1.9.1
+module load apps/tabix-0.2.6
 
-ls *phased.vcf > phased_vcf.names
+for i in $(ls *split*vcf); do  bgzip $i; done
+for i in $(ls *split*vcf.gz); do tabix $i; done
+
+ls *split*.vcf.gz > phased_vcf.names
 
 bcftools merge --file-list phased_vcf.names -O v -o AA251_phased_outliers.vcf 
 vcftools --vcf AA251_phased_outliers.vcf
+
+VCFtools - 0.1.17
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--vcf AA251_phased_outliers.vcf
+
+After filtering, kept 251 out of 251 Individuals
+After filtering, kept 332 out of a possible 332 Sites
+Run Time = 0.00 seconds
+
 ```
 
-Split into a vcf file for every outlier locus using the [SplitHapVCF.sh]() script
+
+Split into a vcf file for every outlier locus using the [SplitHapVCF.sh](https://github.com/alexjvr1/AriciaAgestis_PopGenMS/blob/master/SplitHapVCF.sh) script
+
+Create the input files by splitting the .bed file 
+
+```
+awk '{print $1}' outliers_toremove.bed > OUTLIERS.CHR
+awk '{print $2}' outliers_toremove.bed > OUTLIERS.START
+awk '{print $3}' outliers_toremove.bed > OUTLIERS.END
+#and paste all HAP names to OUTLIERS.HAP
+
+```
 
 
 
 ### 4. Copy to mac and convert to Fasta format
 ```
+/Users/alexjvr/2018.postdoc/BrownArgus_2018/201902_DataAnalysis/WhatsHap
+
+scp bluecp3:/newhome/aj18951/1a_Aricia_agestis_PopGenomics/WhatsHap/*vcf 
 
 
+for i in $(ls *vcf); do vcfx fasta input=$i reference=ilAriAges1.1.primary.fa; done
 ```
+
+
+
 
 
 5. Draw haplotype network for each locus
