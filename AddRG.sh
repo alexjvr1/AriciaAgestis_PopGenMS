@@ -45,7 +45,7 @@ RGID=1 \
 RGLB=lib1 \
 RGPL=Illumina \
 RGPU=unit1 \
-RGSM=BAR_10_2013" >> ${NAME}.addRG.log
+RGSM=BAR_10_2013" 
 
 time java -jar $PICARD AddOrReplaceReadGroups \
 I=${NAME} \
@@ -57,5 +57,5 @@ RGPU=unit1 \
 RGSM=${RG}
 
 
-echo "samtools index ${RG}.RG.bam" >> ${NAME}.addRG.log
+echo "samtools index ${RG}.RG.bam" 
 time samtools index ${RG}.RG.bam
