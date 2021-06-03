@@ -232,9 +232,16 @@ Use the [WhatsHap.sh](https://github.com/alexjvr1/AriciaAgestis_PopGenMS/blob/ma
 
 Split files into batches of 100 as before. 
 
+This creates a separate vcf file for each sample
+
 
 
 3. Split into different loci
+
+We currently have a vcf file for each sample, but we need independent vcf files for each locus which contain all the samples. 
+
+We'll concatenate all the vcf files together, then split by locus. 
+
 ```
 
 
