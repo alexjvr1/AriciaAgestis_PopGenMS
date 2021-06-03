@@ -228,6 +228,11 @@ for i in $(ls *sh); do qsub $i; done
 
 2. Phase all indivs with WhatsHap
 
+Subset the full vcf file to include only the outlier loci
+```
+vcftools --vcf AAgestis.251_FINAL.newnames.vcf --bed outliers_toremove.bed --recode --recode-INFO-all --out AA251.outliers
+```
+
 Use the [WhatsHap.sh](https://github.com/alexjvr1/AriciaAgestis_PopGenMS/blob/master/WhatsHap.sh) script and modify all variables. 
 
 Split files into batches of 100 as before. 
