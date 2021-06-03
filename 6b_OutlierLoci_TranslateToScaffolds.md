@@ -305,11 +305,14 @@ scp bluecp3:/newhome/aj18951/1a_Aricia_agestis_PopGenomics/WhatsHap/*vcf
 for i in $(ls *vcf); do vcfx fasta input=$i reference=ilAriAges1.1.primary.fa; done
 ```
 
+Check length
+```
+for i in $(ls *fas); do ls $i && awk '{print length}' $i |head -n 2; done
+```
 
 
 
-
-5. Draw haplotype network for each locus
+### 5. Draw haplotype network for each locus
 ```
 
 
