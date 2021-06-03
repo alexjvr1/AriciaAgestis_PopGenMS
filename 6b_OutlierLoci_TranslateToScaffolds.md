@@ -118,11 +118,12 @@ BAR_20_2014
 #Check that the bam files have RG headers that list the same sample names
 module load apps/samtools-1.9.1
 samtools view ../../1a_Aricia_agestis_GWASdata/mapped_ddRAD/BAR_13_2014.bam  |head
+```
 
-´´´
 
 
 #We have no RG information on our samples so we need to add this using [PicardTools](https://gatk.broadinstitute.org/hc/en-us/articles/360037226472-AddOrReplaceReadGroups-Picard-)
+
 ```
 module load apps/picard-2.20.0  
 java -jar /cm/shared/apps/Picard-2.20.0/picard.jar
@@ -170,10 +171,11 @@ tabix -R outliers_toremove.bed phased.vcf.gz > BAR_10_2013.outlier.vcf
 #Split each vcf into the different loci
 #eg
 vcftools --vcf BAR_10_2013.outlier.vcf --chr SUPER_16 --from-bp 13191349 --to-bp 13191435 --recode --recode-INFO-all --out HP5
-´´´
+```
 
 
 Then we can convert this file to fasta sequences using [vcfx](http://www.castelli-lab.net/vcfx.html)
+
 ```
 #This is downloaded on the mac and installed in my software folder
 #add to PATH
@@ -186,13 +188,15 @@ export PATH=/software/bin/macos:$PATH
 #Download the vcf file to be converted and the RefGenome
 scp bluecp3:/newhome/aj18951/1a_Aricia_agestis_GWASdata/RefGenome/ilA*fa .
 vcfx fasta input=HP5.recode.vcf reference=ilAriAges1.1.primary.fa
-
 ```
+
+
+## Automate for full dataset
 
 This works so we'll set up a scripts to automate the steps for all the individuals. After we complete the outliers we need to extract 30 neutral loci as well. 
 
 
-1. Add RG to all bam files and index them after. 
+### 1. Add RG to all bam files and index them after. 
 
 Use the [AddRG.sh](https://github.com/alexjvr1/AriciaAgestis_PopGenMS/blob/master/AddRG.sh) script
 
@@ -218,6 +222,9 @@ for i in $(ls *sh); do qsub $i; done
 
 
 ```
+
+
+
 
 2. Phase all indivs with WhatsHap
 ```
