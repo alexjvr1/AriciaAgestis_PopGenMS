@@ -76,11 +76,22 @@ WhatsHap uses read information from the bam file to phase variants within a give
 
 [WhatsHap](https://whatshap.readthedocs.io/en/latest/installation.html) instructions
 
-Install in software forlder. WhatsHap needed a really particular version of python (>3.4 < 3.7.0)
+Install in software folder. We need several modules loaded: 
 ```
-module load languages/python-anaconda2-2019.03.bioconda
+languages/python-3.8.5
+languages/yasm-1.3.0
+tools/nasm-2.15.05
+tools/autoconf-2.69
 
-conda install -c bioconda/label/cf201901 whatshap
+pip3 install --user whatshap
+export PATH=$HOME/.local/bin:$PATH
+whatshap --help
+```
+
+Now we can phase the vcf file for all indivs. Whatshap authors suggest that PE Illumina reads are not the best option for phasing haplotypes as PE reads don't overlap heterozygous sites. But we're interested in generating phased RAD tags for each individual, so we'll see how it works: 
+
+Test with 3 indivs
+```
 
 
 ```
