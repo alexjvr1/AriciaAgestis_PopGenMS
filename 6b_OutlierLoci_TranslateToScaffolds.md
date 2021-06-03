@@ -145,15 +145,43 @@ cd /newhome/aj18951/1a_Aricia_agestis_PopGenomics/WhatsHap/
 whatshap phase -o phased.vcf --reference=../../1a_Aricia_agestis_GWASdata/RefGenome/ilAriAges1.1.primary.fa AA251.FINAL.MAF0.01.missing0.5perpop.vcf ../../1a_Aricia_agestis_GWASdata/mapped_ddRAD/BAR_10_2013.RG.bam 
 This is WhatsHap 1.1 running under Python 3.8.5
 
-#This works so we'll set up a script to add RG to all bam files and index them after. 
+
+#Once this is done we can extract all the outlier regions from our vcf file using tabix
+module load apps/tabix-0.2.6
+bgzip phased.vcf
+tabix -p vcf phased.vcf.gz 
+
+#We created a bed file with all the outliers in before while generating FastSimCoal input files
+head outliers_toremove.bed 
+SUPER_5 2534002 2534121
+SUPER_8 3986655 3986867
+SUPER_9 8813929 8814131
+SUPER_16 1044346 1044290
+SUPER_16 13191349 13191435
+SUPER_18 7568031 7568229
+SUPER_19 11604518 11604613
+SUPER_22 3379790 3379920
+SUPER_9 13750697 13750872
+SUPER_9 13873437 13873517
+
+#Use this to extract each region from the vcf file. This creates a vcf with all the outlier regions (26)
+tabix -R outliers_toremove.bed phased.vcf.gz > BAR_10_2013.outlier.vcf  
+
+#Now we need to split this vcf into each outlier locus, and we'll create fasta files from these. 
+
 ´´´
 
 
+
+#This works so we'll set up a script to add RG to all bam files and index them after. 
 Add RG to all bam files
 ```
 
 
 ```
+
+
+
 
 
 
