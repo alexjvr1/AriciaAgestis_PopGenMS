@@ -227,11 +227,10 @@ for i in $(ls *sh); do qsub $i; done
 
 
 2. Phase all indivs with WhatsHap
-```
 
+Use the [WhatsHap.sh](https://github.com/alexjvr1/AriciaAgestis_PopGenMS/blob/master/WhatsHap.sh) script and modify all variables. 
 
-```
-
+Split files into batches of 100 as before. 
 
 
 
