@@ -193,12 +193,31 @@ This works so we'll set up a scripts to automate the steps for all the individua
 
 
 1. Add RG to all bam files and index them after. 
- Add RG to all bam files
+
+Use the [AddRG.sh](https://github.com/alexjvr1/AriciaAgestis_PopGenMS/blob/master/AddRG.sh) script
+
+We can multi-thread 100 samples max, so we need to split our files into sets of 100 and submit multiple scripts
+
+Get the list of sample names from the final vcffile
 ```
+module load apps/bcftools-1.8
+bcftools query -l /newhome/aj18951/1a_Aricia_agestis_PopGenomics/WhatsHap/AA251.FINAL.MAF0.01.missing0.5perpop.vcf >> RG
+#These names will be the names we add into the RG for each bam file
+#Copy to BAMLIST to create a list of all the bamfiles
+#cp RG BAMLIST
+#add .bam at the end
+sed -i 's:2013:2013.bam:g' BAMLIST
+sed -i 's:2014:2014.bam:g' BAMLIST
+
+#and split both files
+split -l 100 BAMFILES BAMFILES
+split -l 100 RG RG
+
+#Edit the script to point to each set of files. You should end up with 3 scripts to submit to queue in this case
+for i in $(ls *sh); do qsub $i; done
 
 
 ```
-
 
 2. Phase all indivs with WhatsHap
 ```
