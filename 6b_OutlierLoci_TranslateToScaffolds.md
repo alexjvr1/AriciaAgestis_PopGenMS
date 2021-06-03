@@ -165,20 +165,73 @@ SUPER_9 13750697 13750872
 SUPER_9 13873437 13873517
 
 #Use this to extract each region from the vcf file. This creates a vcf with all the outlier regions (26)
-tabix -R outliers_toremove.bed phased.vcf.gz > BAR_10_2013.outlier.vcf  
+tabix -R outliers_toremove.bed phased.vcf.gz > BAR_10_2013.outlier.vcf 
 
-#Now we need to split this vcf into each outlier locus, and we'll create fasta files from these. 
-
+#Split each vcf into the different loci
+#eg
+vcftools --vcf BAR_10_2013.outlier.vcf --chr SUPER_16 --from-bp 13191349 --to-bp 13191435 --recode --recode-INFO-all --out HP5
 ´´´
 
 
+Then we can convert this file to fasta sequences using [vcfx](http://www.castelli-lab.net/vcfx.html)
+```
+#This is downloaded on the mac and installed in my software folder
+#add to PATH
 
-#This works so we'll set up a script to add RG to all bam files and index them after. 
-Add RG to all bam files
+export PATH=/software/bin/macos:$PATH
+
+#We're working here
+/Users/alexjvr/2018.postdoc/BrownArgus_2018/201902_DataAnalysis/WhatsHap
+
+#Download the vcf file to be converted and the RefGenome
+scp bluecp3:/newhome/aj18951/1a_Aricia_agestis_GWASdata/RefGenome/ilA*fa .
+vcfx fasta input=HP5.recode.vcf reference=ilAriAges1.1.primary.fa
+
+```
+
+This works so we'll set up a scripts to automate the steps for all the individuals. After we complete the outliers we need to extract 30 neutral loci as well. 
+
+
+1. Add RG to all bam files and index them after. 
+ Add RG to all bam files
 ```
 
 
 ```
+
+
+2. Phase all indivs with WhatsHap
+```
+
+
+```
+
+
+
+
+3. Split into different loci
+```
+
+
+```
+
+4. Copy to mac and convert to Fasta format
+```
+
+
+```
+
+
+5. Draw haplotype network for each locus
+```
+
+
+```
+
+
+
+
+
 
 
 
