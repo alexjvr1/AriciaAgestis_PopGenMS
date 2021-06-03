@@ -226,7 +226,7 @@ for i in $(ls *sh); do qsub $i; done
 
 
 
-2. Phase all indivs with WhatsHap
+### 2. Phase all indivs with WhatsHap
 
 Subset the full vcf file to include only the outlier loci
 ```
@@ -237,15 +237,18 @@ Use the [WhatsHap.sh](https://github.com/alexjvr1/AriciaAgestis_PopGenMS/blob/ma
 
 Split files into batches of 100 as before. 
 
-This creates a separate vcf file for each sample
+This creates a separate vcf file with a different sample phased for each vcf file.
 
 If run for the whole vcf file this can take a very long time. 
 
 But we can extract the outlier loci and a random set of neutral loci
 
+Runs for ~15min per sample. ~30min when all samples are submitted. 
+
+Since only one indiv is phased per vcf, we need to filter each vcf to include only the phased indiv. Use the [SplitVCF.sh](https://github.com/alexjvr1/AriciaAgestis_PopGenMS/blob/master/SplitVCF.sh) script
 
 
-3. Split into different loci
+### 3. Split into different loci
 
 We currently have a vcf file for each sample, but we need independent vcf files for each locus which contain all the samples. 
 
@@ -253,15 +256,19 @@ We'll concatenate all the vcf files together, then split by locus.
 
 ```
 module load apps/bcftools-1.8
+module load apps/vcftools-0.1.17.2
 
 ls *phased.vcf > phased_vcf.names
 
 bcftools merge --file-list phased_vcf.names -O v -o AA251_phased_outliers.vcf 
-
+vcftools --vcf AA251_phased_outliers.vcf
 ```
 
+Split into a vcf file for every outlier locus using the [SplitHapVCF.sh]() script
 
-4. Copy to mac and convert to Fasta format
+
+
+### 4. Copy to mac and convert to Fasta format
 ```
 
 
