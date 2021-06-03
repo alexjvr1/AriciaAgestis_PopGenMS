@@ -234,6 +234,10 @@ Split files into batches of 100 as before.
 
 This creates a separate vcf file for each sample
 
+If run for the whole vcf file this can take a very long time. 
+
+But we can extract the outlier loci and a random set of neutral loci
+
 
 
 3. Split into different loci
