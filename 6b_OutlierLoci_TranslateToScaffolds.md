@@ -412,7 +412,7 @@ legend((1,10, colnames(ind.hap), col=four.colours), pch=20)
 
 three.colours <- c("gold1", "gold3", "darkorchid")
 plot(net, scale.ratio = 2, cex = 0.8, pie=ind.hap, bg=three.colours)
-legend(1,10, colnames(ind.hap), col=three.colours, pch=20)
+legend("topleft", colnames(ind.hap), col=three.colours, pch=20)
 
 ```
 
