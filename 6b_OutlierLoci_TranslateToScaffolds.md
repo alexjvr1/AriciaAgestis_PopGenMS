@@ -273,7 +273,7 @@ for i in $(ls *phased.vcf); do sed -i 's:0/0:1|1:g' $i; done
 
 #remove any unphased sites
 
-for i in $(ls *vcf); do vcftools --vcf $i --max-missing 1 --phased --recode --recode-INFO-all --out $i.nomiss.phased; done
+for i in $(ls *phased.vcf); do vcftools --vcf $i --max-missing 1 --phased --recode --recode-INFO-all --out $i.nomiss; done
 ```
 
 
@@ -289,10 +289,10 @@ module load apps/vcftools-0.1.17.2
 module load apps/samtools-1.9.1
 module load apps/tabix-0.2.6
 
-for i in $(ls *split*vcf); do  bgzip $i; done
-for i in $(ls *split*vcf.gz); do tabix $i; done
+for i in $(ls *nomiss*vcf); do  bgzip $i; done
+for i in $(ls *nomiss*vcf.gz); do tabix $i; done
 
-ls *split*.vcf.gz > phased_vcf.names
+ls *nomiss*.vcf.gz > phased_vcf.names
 
 bcftools merge --file-list phased_vcf.names -O v -o AA251_phased_outliers.vcf 
 vcftools --vcf AA251_phased_outliers.vcf
