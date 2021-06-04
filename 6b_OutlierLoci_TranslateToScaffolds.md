@@ -384,6 +384,8 @@ HPCH4	202		12
 
 
 Run [VCFx](http://www.castelli-lab.net/vcfx.html)
+
+See [here](https://stackoverflow.com/questions/32481877/what-are-nr-and-fnr-and-what-does-nr-fnr-imply) for awk keep and remove command explanation
 ```
 #~/Software/bin/macos/vcfx 
 #export PATH=~/Software/bin/macos:$PATH
@@ -392,10 +394,13 @@ for i in $(ls *nomiss.recode.vcf); do vcfx fasta input=$i reference=ilAriAges1.1
 
 #modify the popnames file for each haplotype to include only non-missing samples
 #Check if this is working properly
+##If using .toremove file to remove names
 awk 'NR==FNR {T[$1]; next} $1 in T {next} 1' HP4.recode.vcf.missing.toremove popnames > HP4.popnames
 
-#For all samples
-for i in $(ls *toremove); do awk 'NR==FNR {T[$1]; next} $1 in T {next} 1' $i popnames > $i.FINALpopnames; done
+#If using .tokeep files to 
+#Generate .tokeep files for each sample based on the indivs in the final VCF 
+for i in $(ls *nomiss.recode.vcf); do bcftools query -l $i > $i.tokeep; done
+for i in $(ls *tokeep); do awk 'NR==FNR {T[$1]; next} $1 in T {print}' $i popnames > $i.FINALpopnames; done
 
 #Remove all intermediate files
 #And rename final files 
@@ -405,18 +410,19 @@ rename 's:recode.vcf.nomiss.recode.vcf:nomiss.vcf:g' *vcf
 rm *recode.vcf
 #3. remove all full imiss files
 rm *imiss
-#4. rename files listing indivs to remove
+#4. rename files listing indivs to remove and keep
 rename 's:recode.vcf.imiss.::g' *toremove
+rename 's:recode.vcf.nomiss.recode.vcf.tokeep:nomiss.vcf.tokeep:g' *tokeep
 #5. rename fas files
 rename 's:recode.vcf.nomiss.recode.:nomiss.:g' *fas
-#rename popnames
+#6.rename popnames
 rename 's:recode.vcf.imiss.toremove.FINAL:nomiss.:' *FINALpopnames
 
 #Each popnames file needs to have two lines per indiv, because each has two haplotpyes. 
 #This script skips the first line (header) so we'll add headers when we read into R
 awk 'NR>1{for(i=0;i<2;i++)print}' test.popnames 
 
-for i in $(ls *popnames); do awk 'NR>1{for(i=0;i<2;i++)print}' $i > $i.HAP; done
+for i in $(ls *FINALpopnames); do awk 'NR>0{for(i=0;i<2;i++)print}' $i > $i.HAP; done
 
 ```
 
@@ -443,7 +449,7 @@ h <- haplotype(loc1.fa)
 net <- haploNet(h)
 plot(net)
 
-loc1.popnames <- read.table("HP4.nomiss.popnames.HAP", header=F)
+loc1.popnames <- read.table("HP4.nomiss.vcf.tokeep.FINALpopnames.HAP", header=F)
 colnames(loc1.popnames) <- c("Indiv", "pop", "HostPlant", "ColHist", "HaplotypeGroup")
 
 
@@ -490,12 +496,17 @@ h <- haplotype(HP4.fa)
 net <- haploNet(h)
 plot(net)
 
-loc1.popnames <- read.table("HP4.nomiss.popnames.HAP", header=F)
+loc1.popnames <- read.table("HP4.nomiss.vcf.tokeep.FINALpopnames.HAP", header=F)
 colnames(loc1.popnames) <- c("Indiv", "pop", "HostPlant", "ColHist", "HaplotypeGroup")
 ind.hap<-with(stack(setNames(attr(h, "index"), rownames(h))), table(hap=ind, pop=loc1.popnames$HaplotypeGroup))    
 	 
+pdf("HP4.pdf")
 plot(net, scale.ratio = 2, cex = 0.8, pie=ind.hap, bg=four.colours)  
 legend("topleft", colnames(ind.hap), col=four.colours, pch=20)
+dev.off()
+
+
+pdf("HP2.pdf")
 
 ```
 
