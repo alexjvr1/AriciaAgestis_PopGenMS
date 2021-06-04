@@ -398,6 +398,22 @@ summary(loc1.popnames$HaplotypeGroup)
 ##create a table to count haplotypes in each catagory
 ind.hap<-with(stack(setNames(attr(h, "index"), rownames(h))), table(hap=ind, pop=loc1.popnames$HaplotypeGroup))    
 
+     pop
+hap   HOD.oldGer newGer newRR South.oldRR
+  I           52    115    76         182
+  II           0     11     0           0
+  III          0      1     0           0
+  IV           0      1     0           0
+  
+plot(net, scale.ratio = 2, cex = 0.8, pie=ind.hap, bg=four.colours)  
+legend((1,10, colnames(ind.hap), col=four.colours), pch=20)
+
+##To add info about HOD
+
+three.colours <- c("gold1", "gold3", "darkorchid")
+plot(net, scale.ratio = 2, cex = 0.8, pie=ind.hap, bg=three.colours)
+legend(1,10, colnames(ind.hap), col=three.colours, pch=20)
+
 ```
 
 
