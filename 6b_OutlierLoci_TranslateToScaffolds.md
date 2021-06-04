@@ -300,26 +300,105 @@ awk '{print $3}' outliers_toremove.bed > OUTLIERS.END
 /Users/alexjvr/2018.postdoc/BrownArgus_2018/201902_DataAnalysis/WhatsHap
 
 scp bluecp3:/newhome/aj18951/1a_Aricia_agestis_PopGenomics/WhatsHap/*vcf 
-
-
-for i in $(ls *vcf); do vcfx fasta input=$i reference=ilAriAges1.1.primary.fa; done
 ```
 
-Check length
+Create a file with all indiv names, pop, hostPlant, and colHist
+
+For 251 indivs see [Hap.popnames](https://github.com/alexjvr1/AriciaAgestis_PopGenMS/blob/master/Hap.popnames)
+
+
+
+We need to remove all missing data from each file
+```
+for i in $(ls *vcf); do vcftools --vcf $i --missing-indv && mv out.imiss $i.imiss; done
+for i in $(ls *imiss); do awk '$5>0' $i | awk '{print $1}' > $i.toremove; done
+for i in $(ls *vcf); do vcftools --vcf $i --remove $i.imiss.toremove --recode --recode-INFO-all --out $i.nomiss; done
+```
+
+
+
+Run WhatsHap
+```
+#~/Software/bin/macos/vcfx 
+#export PATH=~/Software/bin/macos:$PATH
+
+for i in $(ls *nomiss.recode.vcf); do vcfx fasta input=$i reference=ilAriAges1.1.primary.fa; done
+
+#modify the popnames file for each haplotype to include only non-missing samples
+#Check if this is working properly
+awk 'NR==FNR {T[$1]; next} $1 in T {next} 1' HP4.recode.vcf.missing.toremove popnames > HP4.popnames
+
+#For all samples
+for i in $(ls *toremove); do awk 'NR==FNR {T[$1]; next} $1 in T {next} 1' $i popnames > $i.FINALpopnames; done
+
+#Remove all intermediate files
+#And rename final files 
+#1. all final vcf files will be *.nomiss.vcf
+rename 's:recode.vcf.nomiss.recode.vcf:nomiss.vcf:g' *vcf  
+#2. remove other vcf files
+rm *recode.vcf
+#3. remove all full imiss files
+rm *imiss
+#4. rename files listing indivs to remove
+rename 's:recode.vcf.imiss.::g' *toremove
+#5. rename fas files
+rename 's:recode.vcf.nomiss.recode.:nomiss.:g' *fas
+#rename popnames
+rename 's:recode.vcf.imiss.toremove.FINAL:nomiss.:' *FINALpopnames
+
+#Each popnames file needs to have two lines per indiv, because each has two haplotpyes. 
+#This script skips the first line (header) so we'll add headers when we read into R
+awk 'NR>1{for(i=0;i<2;i++)print}' test.popnames 
+
+for i in $(ls *popnames); do awk 'NR>1{for(i=0;i<2;i++)print}' $i > $i.HAP; done
+
+```
+
+Quick length check for all the haplotypes. We'll see more once they're in R
 ```
 for i in $(ls *fas); do ls $i && awk '{print length}' $i |head -n 2; done
+#Some of the sequences are really short, but we'll see what the haplotypes look like before deciding what to do
 ```
 
 
 
 ### 5. Draw haplotype network for each locus
+
+
+On mac
 ```
+/Users/alexjvr/2018.postdoc/BrownArgus_2018/201902_DataAnalysis/WhatsHap
 
+R
+library(pegas)
+four.colours <- c("darkorchid4", "darkorchid", "gold1", "gold3")  ##for the groups Old.Ger.HOD, newGer, newRR, South.oldRR)
+loc1.fa <- read.FASTA("HP4.nomiss.fas")
+h <- haplotype(loc1.fa)
+net <- haploNet(h)
+plot(net)
+
+loc1.popnames <- read.table("HP4.nomiss.popnames.HAP", header=F)
+colnames(loc1.popnames) <- c("Indiv", "pop", "HostPlant", "ColHist", "HaplotypeGroup")
+
+
+head(loc1.popnames)
+        Indiv pop HostPlant ColHist HaplotypeGroup
+1 BAR_10_2013 BAR  Rockrose     new          newRR
+2 BAR_10_2013 BAR  Rockrose     new          newRR
+3 BAR_11_2014 BAR  Rockrose     new          newRR
+4 BAR_11_2014 BAR  Rockrose     new          newRR
+5 BAR_12_2013 BAR  Rockrose     new          newRR
+6 BAR_12_2013 BAR  Rockrose     new          newRR
+
+summary(loc1.popnames$HaplotypeGroup)
+  HOD.oldGer      newGer       newRR South.oldRR 
+         52         128          76         182 
+
+
+##create a table to count haplotypes in each catagory
+ind.hap<-with(stack(setNames(attr(h, "index"), rownames(h))), table(hap=ind, pop=loc1.popnames$HaplotypeGroup))    
 
 ```
-
-
-
 
 
 
