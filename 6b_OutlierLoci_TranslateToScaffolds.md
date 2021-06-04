@@ -303,10 +303,11 @@ VCFtools - 0.1.17
 Parameters as interpreted:
 	--vcf AA251_phased_outliers.vcf
 
-After filtering, kept 251 out of 251 Individuals
+After filtering, kept 250 out of 250 Individuals
 After filtering, kept 332 out of a possible 332 Sites
 Run Time = 0.00 seconds
 
+##FOR_7_2014 is mis-indexing (I think) but I can't figure out why. We see two FOR_7_2014 samples in the file after indexing, but I can't physically see them in the file with bcftools query -l or less. I've removed this sample to proceed. 
 ```
 
 
@@ -328,13 +329,14 @@ awk '{print $3}' outliers_toremove.bed > OUTLIERS.END
 ```
 /Users/alexjvr/2018.postdoc/BrownArgus_2018/201902_DataAnalysis/WhatsHap
 
-scp bluecp3:/newhome/aj18951/1a_Aricia_agestis_PopGenomics/WhatsHap/*vcf 
+scp bluecp3:/newhome/aj18951/1a_Aricia_agestis_PopGenomics/WhatsHap/*vcf .
 ```
 
 Create a file with all indiv names, pop, hostPlant, and colHist
 
 For 251 indivs see [Hap.popnames](https://github.com/alexjvr1/AriciaAgestis_PopGenMS/blob/master/Hap.popnames)
 
+*I'm removing FOR_7_2014 because couldn't be merged with bcftools*
 
 
 We need to remove all missing data from each file
@@ -344,6 +346,41 @@ for i in $(ls *imiss); do awk '$5>0' $i | awk '{print $1}' > $i.toremove; done
 for i in $(ls *vcf); do vcftools --vcf $i --remove $i.imiss.toremove --recode --recode-INFO-all --out $i.nomiss; done
 ```
 
+Keep only Loci with at least 2 variants, and data for 100 indivs
+
+*HP1 drops out from loci being filtered out*
+
+```
+HAP	nSamples	nSites
+CH1	162		5
+CH10	160		7
+CH11	164		19
+CH12	80		19  *
+CH13	145		18
+CH14	105		17
+CH15	190		2   **
+CH2	20		19  **
+CH3	121		17
+CH4	147		1   **
+CH5	66		6   **
+CH6	160		22
+CH7	126		16
+CH8	193		6
+CH9	108		23
+HP1	0		    **
+HP2	124		13
+HP3	77		30  *
+HP4	199		6
+HP5	160		14
+HP6	148		16
+HP7	159		7
+HP8	150		8
+HPCH1	163		20
+HPCH2	155		9
+HPCH4	202		12
+```
+
+21 Haplotypes remaining (we're keeping HP3 and CH12 to see what they look like)
 
 
 Run [VCFx](http://www.castelli-lab.net/vcfx.html)
@@ -421,7 +458,7 @@ head(loc1.popnames)
 
 summary(loc1.popnames$HaplotypeGroup)
   HOD.oldGer      newGer       newRR South.oldRR 
-         52         128          76         182 
+         46         118          76         160 
 
 
 ##create a table to count haplotypes in each catagory
@@ -435,7 +472,7 @@ hap   HOD.oldGer newGer newRR South.oldRR
   IV           0      1     0           0
   
 plot(net, scale.ratio = 2, cex = 0.8, pie=ind.hap, bg=four.colours)  
-legend((1,10, colnames(ind.hap), col=four.colours), pch=20)
+legend("topleft", colnames(ind.hap), col=four.colours, pch=20)
 
 ##To add info about HOD
 
@@ -445,6 +482,22 @@ legend("topleft", colnames(ind.hap), col=three.colours, pch=20)
 
 ```
 
+
+And for the rest
+```
+HP4.fa <- read.FASTA("HP4.nomiss.fas")
+h <- haplotype(HP4.fa)
+net <- haploNet(h)
+plot(net)
+
+loc1.popnames <- read.table("HP4.nomiss.popnames.HAP", header=F)
+colnames(loc1.popnames) <- c("Indiv", "pop", "HostPlant", "ColHist", "HaplotypeGroup")
+ind.hap<-with(stack(setNames(attr(h, "index"), rownames(h))), table(hap=ind, pop=loc1.popnames$HaplotypeGroup))    
+	 
+plot(net, scale.ratio = 2, cex = 0.8, pie=ind.hap, bg=four.colours)  
+legend("topleft", colnames(ind.hap), col=four.colours, pch=20)
+
+```
 
 
 
