@@ -228,10 +228,28 @@ for i in $(ls *sh); do qsub $i; done
 
 ### 2. Phase all indivs with WhatsHap
 
-Subset the full vcf file to include only the outlier loci
+
+#### 2.1 Subset the full vcf file to include only the outlier loci
 ```
 vcftools --vcf AAgestis.251_FINAL.newnames.vcf --bed outliers_toremove.bed --recode --recode-INFO-all --out AA251.outliers
 ```
+
+#### 2.2 Split file into individuals before we phase. This will help the script run much faster, and vcf can have problems with combining phased and unphased data in one file. 
+```
+module load apps/bcftools-1.8
+bcftools query -l AA251.outliers.recode.vcf > indivnames
+split -l 100 indivnames indivnames
+```
+
+Use the [SplitVCF.sh](https://github.com/alexjvr1/AriciaAgestis_PopGenMS/blob/master/SplitVCF.sh) script
+
+
+Remove all missing data
+```
+for i in $(ls *outliers.recode.vcf); do vcftools --vcf $i --max-missing 1 --recode --recode-INFO-all --out $i.nomiss; done
+```
+
+#### 2.3 Phase each indiv
 
 Use the [WhatsHap.sh](https://github.com/alexjvr1/AriciaAgestis_PopGenMS/blob/master/WhatsHap.sh) script and modify all variables. 
 
@@ -245,7 +263,18 @@ But we can extract the outlier loci and a random set of neutral loci
 
 Runs for ~15min per sample. ~30min when all samples are submitted. 
 
-Since only one indiv is phased per vcf, we need to filter each vcf to include only the phased indiv. Use the [SplitVCF.sh](https://github.com/alexjvr1/AriciaAgestis_PopGenMS/blob/master/SplitVCF.sh) script
+
+#### 2.4 Remove missing and unphased variants
+
+WhatsHap only phases the hets, so we need to change the notation of the homozygous sites
+```
+for i in $(ls *phased.vcf); do sed -i 's:1/1:1|1:g' $i; done
+for i in $(ls *phased.vcf); do sed -i 's:0/0:1|1:g' $i; done
+
+#remove any unphased sites
+
+for i in $(ls *vcf); do vcftools --vcf $i --max-missing 1 --phased --recode --recode-INFO-all --out $i.nomiss.phased; done
+```
 
 
 ### 3. Split into different loci
@@ -317,7 +346,7 @@ for i in $(ls *vcf); do vcftools --vcf $i --remove $i.imiss.toremove --recode --
 
 
 
-Run WhatsHap
+Run [VCFx](http://www.castelli-lab.net/vcfx.html)
 ```
 #~/Software/bin/macos/vcfx 
 #export PATH=~/Software/bin/macos:$PATH
