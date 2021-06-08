@@ -278,7 +278,7 @@ If run for the whole vcf file this can take a very long time.
 
 But we can extract the outlier loci and a random set of neutral loci
 
-Runs for ~20sec per sample. ~30min when all samples are submitted. 
+Runs for ~20sec-2min per sample. ~30min when all samples are submitted. 
 
 
 #### 2.4 Remove missing and unphased variants
@@ -286,7 +286,7 @@ Runs for ~20sec per sample. ~30min when all samples are submitted.
 WhatsHap only phases the hets, so we need to change the notation of the homozygous sites
 ```
 for i in $(ls *phased.vcf); do sed -i 's:1/1:1|1:g' $i; done
-for i in $(ls *phased.vcf); do sed -i 's:0/0:1|1:g' $i; done
+for i in $(ls *phased.vcf); do sed -i 's:0/0:0|0:g' $i; done
 
 #remove any unphased sites
 
@@ -306,8 +306,8 @@ module load apps/vcftools-0.1.17.2
 module load apps/samtools-1.9.1
 module load apps/tabix-0.2.6
 
-for i in $(ls *nomiss*vcf); do  bgzip $i; done
-for i in $(ls *nomiss*vcf.gz); do tabix $i; done
+for i in $(ls *RG*nomiss*vcf); do  bgzip $i; done
+for i in $(ls *RG*nomiss*vcf.gz); do tabix $i; done
 
 ls *nomiss*.vcf.gz > phased_vcf.names
 
@@ -325,6 +325,23 @@ After filtering, kept 332 out of a possible 332 Sites
 Run Time = 0.00 seconds
 
 ##FOR_7_2014 is mis-indexing (I think) but I can't figure out why. We see two FOR_7_2014 samples in the file after indexing, but I can't physically see them in the file with bcftools query -l or less. I've removed this sample to proceed. 
+
+
+
+
+bcftools merge --file-list phased_vcf.names -O v -o AA251_phased_neutral.vcf 
+vcftools --vcf AA251_phased_neutral.vcf
+
+VCFtools - 0.1.17
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--vcf AA251_phased_neutral.vcf
+
+After filtering, kept 251 out of 251 Individuals
+After filtering, kept 315 out of a possible 315 Sites
+Run Time = 0.00 seconds
+
 ```
 
 
@@ -337,6 +354,12 @@ awk '{print $1}' outliers_toremove.bed > OUTLIERS.CHR
 awk '{print $2}' outliers_toremove.bed > OUTLIERS.START
 awk '{print $3}' outliers_toremove.bed > OUTLIERS.END
 #and paste all HAP names to OUTLIERS.HAP
+
+
+awk '{print $1}' neutral_toremove.bed > NEUTRAL.CHR
+awk '{print $2}' neutral_toremove.bed > NEUTRAL.START
+awk '{print $3}' neutral_toremove.bed > NEUTRAL.END
+#Name Neutral Loci NEUT1-20 in NEUTRAL.HAP
 
 ```
 
