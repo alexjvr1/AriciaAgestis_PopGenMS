@@ -433,11 +433,10 @@ See [here](https://stackoverflow.com/questions/32481877/what-are-nr-and-fnr-and-
 for i in $(ls *nomiss.recode.vcf); do vcfx fasta input=$i reference=ilAriAges1.1.primary.fa; done
 
 #modify the popnames file for each haplotype to include only non-missing samples
-#Check if this is working properly
-##If using .toremove file to remove names
+##If using .toremove file to remove names - I didn't use this method. 
 awk 'NR==FNR {T[$1]; next} $1 in T {next} 1' HP4.recode.vcf.missing.toremove popnames > HP4.popnames
 
-#If using .tokeep files to 
+#If using .tokeep files to - I used this method. 
 #Generate .tokeep files for each sample based on the indivs in the final VCF 
 for i in $(ls *nomiss.recode.vcf); do bcftools query -l $i > $i.tokeep; done
 for i in $(ls *tokeep); do awk 'NR==FNR {T[$1]; next} $1 in T {print}' $i popnames > $i.FINALpopnames; done
