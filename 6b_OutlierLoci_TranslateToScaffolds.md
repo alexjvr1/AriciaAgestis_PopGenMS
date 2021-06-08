@@ -278,7 +278,7 @@ If run for the whole vcf file this can take a very long time.
 
 But we can extract the outlier loci and a random set of neutral loci
 
-Runs for ~15min per sample. ~30min when all samples are submitted. 
+Runs for ~20sec per sample. ~30min when all samples are submitted. 
 
 
 #### 2.4 Remove missing and unphased variants
