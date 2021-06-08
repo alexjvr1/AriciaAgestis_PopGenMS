@@ -77,12 +77,6 @@ SUPER_12 2363714-2363804
 SUPER_12 4828453-4828688
 SUPER_13 1406702-1406841
 SUPER_13 6798543-6798615
-
-
-
-
-
-
 ```
 
 
@@ -207,7 +201,7 @@ vcfx fasta input=HP5.recode.vcf reference=ilAriAges1.1.primary.fa
 ```
 
 
-## Automate for full dataset
+## Automate for full dataset (outliers and Neutral)
 
 This works so we'll set up a scripts to automate the steps for all the individuals. After we complete the outliers we need to extract 30 neutral loci as well. 
 
@@ -249,14 +243,19 @@ for i in $(ls *sh); do qsub $i; done
 ```
 vcftools --vcf AAgestis.251_FINAL.newnames.vcf --bed outliers_toremove.bed --recode --recode-INFO-all --out AA251.outliers
 
-vcftools --vcf AAgestis.251_FINAL.newnames.vcf --bed neutral_toremove.bed --recode --recode-INFO-all --out AA251.outliers
+vcftools --vcf ../FINAL_VCF/AAgestis.251_FINAL.newnames.vcf --bed neutral_toremove.bed --recode --recode-INFO-all --out AA251.neutral
 ```
 
 #### 2.2 Split file into individuals before we phase. This will help the script run much faster, and vcf can have problems with combining phased and unphased data in one file. 
 ```
 module load apps/bcftools-1.8
+#Outlier
 bcftools query -l AA251.outliers.recode.vcf > indivnames
 split -l 100 indivnames indivnames
+
+#Neutral
+bcftools query -l AA251.neutral.recode.vcf > neutral.indivnames
+split -l 100 neutral.indivnames neutral.indivnames
 ```
 
 Use the [SplitVCF.sh](https://github.com/alexjvr1/AriciaAgestis_PopGenMS/blob/master/SplitVCF.sh) script
@@ -264,7 +263,7 @@ Use the [SplitVCF.sh](https://github.com/alexjvr1/AriciaAgestis_PopGenMS/blob/ma
 
 Remove all missing data
 ```
-for i in $(ls *outliers.recode.vcf); do vcftools --vcf $i --max-missing 1 --recode --recode-INFO-all --out $i.nomiss; done
+for i in $(ls *split.recode.vcf); do vcftools --vcf $i --max-missing 1 --recode --recode-INFO-all --out $i.nomiss; done
 ```
 
 #### 2.3 Phase each indiv
