@@ -52,7 +52,7 @@ CH15 - SUPER_Z 28513300 -28513286
 ```
 
 
-5 neutral loci
+20 neutral loci
 ```
 SUPER_9 634759-634537
 SUPER_9 1266219-1266047
@@ -66,6 +66,22 @@ SUPER_Z 30091796-30091723
 SUPER_2 7688146-7688027
 SUPER_3 3617958-3617871
 SUPER_3 11126031-11125804
+
+SUPER_10 594536-594596
+SUPER_10 1020514-1020624
+SUPER_10  14105766-14105962 
+SUPER_11 2265943-2266021
+SUPER_11 5910423-5910508
+SUPER_11 17281597-17281757
+SUPER_12 2363714-2363804
+SUPER_12 4828453-4828688
+SUPER_13 1406702-1406841
+SUPER_13 6798543-6798615
+
+
+
+
+
 
 ```
 
@@ -229,9 +245,11 @@ for i in $(ls *sh); do qsub $i; done
 ### 2. Phase all indivs with WhatsHap
 
 
-#### 2.1 Subset the full vcf file to include only the outlier loci
+#### 2.1 Subset the full vcf file to include only the outlier loci and a second file with only neutral loci
 ```
 vcftools --vcf AAgestis.251_FINAL.newnames.vcf --bed outliers_toremove.bed --recode --recode-INFO-all --out AA251.outliers
+
+vcftools --vcf AAgestis.251_FINAL.newnames.vcf --bed neutral_toremove.bed --recode --recode-INFO-all --out AA251.outliers
 ```
 
 #### 2.2 Split file into individuals before we phase. This will help the script run much faster, and vcf can have problems with combining phased and unphased data in one file. 
