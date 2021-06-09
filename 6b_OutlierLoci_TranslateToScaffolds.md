@@ -390,6 +390,7 @@ Keep only Loci with at least 2 variants, and data for 100 indivs
 
 *HP1 drops out from loci being filtered out*
 
+OUTLIER
 ```
 HAP	nSamples	nSites
 CH1	167		5
@@ -420,7 +421,34 @@ HPCH2	162		9
 HPCH4	205		12
 ```
 
-22 Haplotypes remaining
+22 Loci remaining
+
+NEUTRAL
+```
+HAP	nSamples	nSites
+NEUT1	251		0   **
+NEUT2	176		28
+NEUT3	229		30
+NEUT4	129		19
+NEUT5	154		18
+NEUT6	247		13
+NEUT7	244		7
+NEUT8	165		11
+NEUT9	175		13
+NEUT10	228		16
+NEUT11	222		13
+NEUT12	149		12
+NEUT13	199		11
+NEUT14	181		14
+NEUT15	213		7
+NEUT16	199		17
+NEUT17	174		14
+NEUT18	197		35
+NEUT19	215		16
+NEUT20	188		12
+
+```
+19 loci remaining
 
 
 Run [VCFx](http://www.castelli-lab.net/vcfx.html)
