@@ -392,35 +392,35 @@ Keep only Loci with at least 2 variants, and data for 100 indivs
 
 ```
 HAP	nSamples	nSites
-CH1	162		5
-CH10	160		7
-CH11	164		19
-CH12	80		19  *
-CH13	145		18
+CH1	167		5
+CH10	197		7
+CH11	204		19
+CH12	109		19  
+CH13	193		18
 CH14	105		17
-CH15	190		2   **
-CH2	20		19  **
-CH3	121		17
-CH4	147		1   **
-CH5	66		6   **
-CH6	160		22
-CH7	126		16
-CH8	193		6
-CH9	108		23
+CH15	191		2   
+CH2	26		19  **
+CH3	166		17
+CH4	148		1   **
+CH5	77		6   **
+CH6	195		22
+CH7	154		16
+CH8	214		6
+CH9	138		23
 HP1	0		    **
-HP2	124		13
-HP3	77		30  *
-HP4	199		6
-HP5	160		14
-HP6	148		16
-HP7	159		7
-HP8	150		8
-HPCH1	163		20
-HPCH2	155		9
-HPCH4	202		12
+HP2	162		13
+HP3	153		30  
+HP4	211		6
+HP5	192		14
+HP6	167		16
+HP7	185		7
+HP8	172		8
+HPCH1	205		20
+HPCH2	162		9
+HPCH4	205		12
 ```
 
-21 Haplotypes remaining (we're keeping HP3 and CH12 to see what they look like)
+22 Haplotypes remaining
 
 
 Run [VCFx](http://www.castelli-lab.net/vcfx.html)
