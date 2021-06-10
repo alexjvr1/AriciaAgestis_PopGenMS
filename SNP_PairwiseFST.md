@@ -68,13 +68,19 @@ Parameters as interpreted:
 Keeping individuals in 'keep' list
 After filtering, kept 251 out of 251 Individuals
 Outputting Weir and Cockerham Fst estimates.
-Weir and Cockerham mean Fst estimate: 0.016332
-Weir and Cockerham weighted Fst estimate: 0.018222
-After filtering, kept 35462 out of a possible 35462 Sites
-Run Time = 5.00 seconds
+Weir and Cockerham mean Fst estimate: 0.0093096
+Weir and Cockerham weighted Fst estimate: 0.018971
+After filtering, kept 136613 out of a possible 136613 Sites
+Run Time = 19.00 seconds
+
 
 ```
-5 seconds for 35k loci!
+5 seconds for 137k loci!
+
+
+## 2. Fst Plot
+
+
 
 
 
