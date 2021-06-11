@@ -209,7 +209,7 @@ Draw manhattan plot
 library(qqman)
 
 pdf("HP.manhattan.pdf")
-manhattan(Fst.test.nomiss, chr="CHROM", bp="POS", p="WEIR_AND_COCKERHAM_FST", snp="SNP", col=c("gray10", "gray60"), chrlabs=c(1:22, "Z"), highlight=HIGHLIGHT_HPSNPS, logp=F, suggestiveline=F, genomewideline=F)
+manhattan(Fst.HP.nomiss, chr="CHROM", bp="POS", p="WEIR_AND_COCKERHAM_FST", snp="SNP", col=c("gray10", "gray60"), chrlabs=c(1:22, "Z"), highlight=HIGHLIGHT_HPSNPS, logp=F, suggestiveline=F, genomewideline=F)
 dev.off()
 
 
