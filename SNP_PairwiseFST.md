@@ -80,6 +80,50 @@ Run Time = 19.00 seconds
 
 ## 2. Fst Plot
 
+We're using Manhattan plot from qqman. See docs [here](https://www.rdocumentation.org/packages/qqman/versions/0.1.2/topics/manhattan)
+
+### 1. We need to change the chromosome names to numbers
+
+sed 's:SUPER_::g' RR.vs.Ger.weir.fst > Fst.results
+sed 's:Z:50:g' Fst.results > Fst.results2
+rm Fst.results && mv Fst.results2 Fst.results
+
+
+### 2. Add in a column with names of the outlier loci we want to highlight
+
+We can use dplyr to add info into the SNP column using the case_when function. See [here](https://www.marsja.se/r-add-column-to-dataframe-based-on-other-columns-conditions-dplyr/) and [here](https://www.r-bloggers.com/2020/05/r-how-to-assign-values-based-on-multiple-conditions-of-different-columns/) for useful dplyr notes. And these links for a [dplyr cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf), and other [useful cheatsheets](https://www.rstudio.com/resources/cheatsheets/). 
+
+We get the outlier positions from table S2 from the BA Pop Gen MS. I've copied them here for ease of use: 
+```
+HP1	HostPlant	CHR 5	2534002	2534121	119	1
+HP2	HostPlant	CHR 8	3986655	3986867	212	13
+HP3	HostPlant	CHR 9	8813929	8814131	202	30
+HP4	HostPlant	CHR 16	1044290	1044346	56	6
+HP5	HostPlant	CHR 16	13191349	13191435	86	14
+HP6	HostPlant	CHR 18	7568031	7568229	198	16
+HP7	HostPlant	CHR 19	11604518	11604613	95	7
+HP8	HostPlant	CHR 22	3379790	3379920	130	8
+HPCH1	Both	CHR 9	13750697	13750872	175	20
+HPCH2	ColHist	CHR 9	13873437	13873517	80	9
+HPCH3	Both	CHR Z	9249052	9249052	1	1
+HPCH4	Both	CHR Z	39688177	39688352	175	12
+
+
+```
+
+
+
+```
+library(dplyr)
+Fst.test <- Fst.test %>% mutate(SNP=case_when(CHROM==5 & POS>2534001 ~"HP1", CHROM==5 & POS<2534122 ~"HP1"))
+
+
+```
+
+
+
+
+
 
 
 
