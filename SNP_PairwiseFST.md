@@ -74,6 +74,19 @@ After filtering, kept 136613 out of a possible 136613 Sites
 Run Time = 19.00 seconds
 
 
+
+##ColHist
+
+#create a file for each population 
+grep new popnames |awk '{print $1,$2}' >> New.names
+grep old popnames |awk '{print $1,$2}' >> Est.names
+
+#Estimate per locus W&C Fst
+vcftools --vcf AA251_FINAL.noMT.recode.vcf  --weir-fst-pop New.names --weir-fst-pop Est.names --out New.vs.Est
+
+
+
+
 ```
 5 seconds for 137k loci!
 
@@ -84,9 +97,18 @@ We're using Manhattan plot from qqman. See docs [here](https://www.rdocumentatio
 
 ### 1. We need to change the chromosome names to numbers
 
-sed 's:SUPER_::g' RR.vs.Ger.weir.fst > Fst.results
-sed 's:Z:50:g' Fst.results > Fst.results2
-rm Fst.results && mv Fst.results2 Fst.results
+```
+##HostPlant
+sed 's:SUPER_::g' RR.vs.Ger.weir.fst > Fst.results.RRvsGer
+sed 's:Z:50:g' Fst.results.RRvsGer2 > Fst.results.RRvsGer2
+rm Fst.results.RRvsGer && mv Fst.results.RRvsGer2 Fst.results.RRvsGer
+
+##ColHist
+sed 's:SUPER_::g' New.vs.Est.weir.fst > Fst.results.NewvsEst
+sed 's:Z:50:g' Fst.results.NewvsEst > Fst.results2.NewvsEst
+rm Fst.results.NewvsEst && mv Fst.results2.NewvsEst Fst.results.NewvsEst
+
+```
 
 
 ### 2. Add in a column with names of the outlier loci we want to highlight
@@ -95,6 +117,22 @@ We can use dplyr to add info into the SNP column using the case_when function. S
 
 We get the outlier positions from table S2 from the BA Pop Gen MS. I've copied them here for ease of use: 
 ```
+Outlier Locus name	Association	Chr	Start bp	End bp	Length (bp)	nr SNPs
+CH1	ColHist	CHR 2	19346580	19346640	60	5
+CH10	ColHist	CHR 18	5319947	5320001	54	7
+CH11	ColHist	CHR 18	7677546	7677682	136	19
+CH12	ColHist	CHR 19	7875580	7875833	253	19
+CH13	ColHist	CHR 20	8466072	8466312	240	18
+CH14	ColHist	CHR Z	22737599	22737787	188	17
+CH15	ColHist	CHR Z	28513286	28513300	14	2
+CH2	ColHist	CHR 3	13157714	13158002	288	19
+CH3	ColHist	CHR 5	1546360	1546529	169	17
+CH4	ColHist	CHR 7	10650285	10650289	4	1
+CH5	ColHist	CHR 9	15951709	15951875	166	6
+CH6	ColHist	CHR 10	14888691	14888843	152	22
+CH7	ColHist	CHR 17	1198584	1198741	157	16
+CH8	ColHist	CHR 18	2919521	2919551	30	6
+CH9	ColHist	CHR 18	5119217	5119475	258	23
 HP1	HostPlant	CHR 5	2534002	2534121	119	1
 HP2	HostPlant	CHR 8	3986655	3986867	212	13
 HP3	HostPlant	CHR 9	8813929	8814131	202	30
@@ -106,16 +144,25 @@ HP8	HostPlant	CHR 22	3379790	3379920	130	8
 HPCH1	Both	CHR 9	13750697	13750872	175	20
 HPCH2	ColHist	CHR 9	13873437	13873517	80	9
 HPCH3	Both	CHR Z	9249052	9249052	1	1
-HPCH4	Both	CHR Z	39688177	39688352	175	12
+HPCH4	Both	CHR Z	39688177	39688352	175	12![image](https://user-images.githubusercontent.com/12142475/121661297-f8551800-ca9b-11eb-8b76-fc9ecdfd6529.png)
+
 
 
 ```
 
 
-Remember we've renamed the chromosomes to be numbers (1-22, Z=50)
+We've renamed the chromosomes to be numbers (1-22, Z=50) using awk
 ```
+#Read in data and remove NAs
+Fst.HP <- read.table("Fst.results.RRvsGer", header=T)
+Fst.HP.nomiss <- na.exclude(Fst.HP)
+
+Fst.CH <- read.table("Fst.results.NewvsEst", header=T)
+Fst.CH.nomiss <- na.exclude(Fst.CH)
+
+
 library(dplyr)
-Fst.test.nomiss <- Fst.test.nomiss %>% mutate(SNP=case_when(
+Fst.HP.nomiss <- Fst.HP.nomiss %>% mutate(SNP=case_when(
 CHROM==5 & POS>2534001 & POS<2534122 ~"HP1",
 CHROM==8 & POS>3986654 & POS<3986868 ~"HP2",
 CHROM==9 & POS>8813928 & POS<8814132 ~"HP3", 
@@ -127,7 +174,10 @@ CHROM==22 & POS>3379789 & POS<3379919 ~"HP8",
 CHROM==9 & POS>13750696 & POS<13750873 ~"HPCH1",
 CHROM==9 & POS>13873436 & POS<13873518 ~"HPCH2",
 CHROM==50 & POS>9249051 & POS<9249053 ~"HPCH3",
-CHROM==50 & POS>39688176 & POS<39688353 ~"HPCH4",
+CHROM==50 & POS>39688176 & POS<39688353 ~"HPCH4"
+))
+
+Fst.CH.nomiss <- Fst.CH.nomiss %>% mutate(SNP=case_when(
 CHROM==2 & POS>19346579 & POS<19346641 ~"CH1",
 CHROM==18 & POS>5319946& POS<5320002 ~"CH10",
 CHROM==18 & POS>7677545 & POS<7677683 ~"CH11",
@@ -154,13 +204,11 @@ Draw manhattan plot
 ```
 library(qqman)
 
-#remove any missing data
-Fst.test <- read.table("Fst.results.test", header=T)
-Fst.test.nomiss <- na.exclude(Fst.test)
-
-manhattan(Fst.test.nomiss, chr="CHROM", bp="POS", p="WEIR_AND_COCKERHAM_FST", snp="SNP", col=c("gray10", "gray60"), chrlabs=c(1:22, "Z"), highlight=HIGHLIGHT_SNPS, logp=F, suggestiveline=F, genomewideline=F)
-
-
 pdf("HP.manhattan.pdf")
-manhattan(Fst.test.nomiss, chr="CHROM", bp="POS", p="WEIR_AND_COCKERHAM_FST", snp="SNP", col=c("gray10", "gray60"), chrlabs=c(1:22, "Z"), highlight=HIGHLIGHT_SNPS, logp=F, suggestiveline=F, genomewideline=F)
+manhattan(Fst.test.nomiss, chr="CHROM", bp="POS", p="WEIR_AND_COCKERHAM_FST", snp="SNP", col=c("gray10", "gray60"), chrlabs=c(1:22, "Z"), highlight=HIGHLIGHT_HPSNPS, logp=F, suggestiveline=F, genomewideline=F)
+dev.off()
+
+
+pdf("CH.manhattan.pdf")
+manhattan(Fst.CH.nomiss, chr="CHROM", bp="POS", p="WEIR_AND_COCKERHAM_FST", snp="SNP", col=c("gray10", "gray60"), chrlabs=c(1:22, "Z"), highlight=HIGHLIGHT_CHSNPS, logp=F, suggestiveline=F, genomewideline=F)
 dev.off()
