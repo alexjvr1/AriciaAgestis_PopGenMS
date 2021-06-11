@@ -112,19 +112,40 @@ HPCH4	Both	CHR Z	39688177	39688352	175	12
 ```
 
 
-
+Remember we've renamed the chromosomes to be numbers (1-22, Z=50)
 ```
 library(dplyr)
-Fst.test <- Fst.test %>% mutate(SNP=case_when(CHROM==5 & POS>2534001 ~"HP1", CHROM==5 & POS<2534122 ~"HP1"))
+Fst.test.nomiss <- Fst.test.nomiss %>% mutate(SNP=case_when(
+CHROM==5 & POS>2534001 & POS<2534122 ~"HP1",
+CHROM==8 & POS>3986654 & POS<3986868 ~"HP2",
+CHROM==9 & POS>8813928 & POS<8814132 ~"HP3", 
+CHROM==16 & POS>1044289 & POS<1044347 ~"HP4", 
+CHROM==16 & POS>13191348 & POS<13191436 ~"HP5", 
+CHROM==18 & POS>7568030 & POS<7568230 ~"HP6", 
+CHROM==19 & POS>11604517 & POS<11604614 ~"HP7",
+CHROM==22 & POS>3379789 & POS<3379919 ~"HP8",
+CHROM==9 & POS>13750696 & POS<13750873 ~"HPCH1",
+CHROM==9 & POS>13873436 & POS<13873518 ~"HPCH2",
+CHROM==50 & POS>9249051 & POS<9249053 ~"HPCH3",
+CHROM==50 & POS>39688176 & POS<39688353 ~"HPCH4",
+))
 
+#Create a vector of all the loci to highlight: 
+HIGHLIGHT_SNPS <- as.character(c("HP1", "HP2", "HP3", "HP4", "HP5", "HP6", "HP7", "HP7", "HP8", "HPCH1", "HPCH2", "HPCH3", "HPCH4"))
 
 ```
 
+Draw manhattan plot
+```
+library(qqman)
+
+#remove any missing data
+Fst.test <- read.table("Fst.results.test", header=T)
+Fst.test.nomiss <- na.exclude(Fst.test)
+
+manhattan(Fst.test.nomiss, chr="CHROM", bp="POS", p="WEIR_AND_COCKERHAM_FST", snp="SNP", col=c("gray10", "gray60"), chrlabs=c(1:22, "Z"), highlight=HIGHLIGHT_SNPS, logp=F, suggestiveline=F, genomewideline=F)
 
 
-
-
-
-
-
-
+pdf("HP.manhattan.pdf")
+manhattan(Fst.test.nomiss, chr="CHROM", bp="POS", p="WEIR_AND_COCKERHAM_FST", snp="SNP", col=c("gray10", "gray60"), chrlabs=c(1:22, "Z"), highlight=HIGHLIGHT_SNPS, logp=F, suggestiveline=F, genomewideline=F)
+dev.off()
