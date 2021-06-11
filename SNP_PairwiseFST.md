@@ -20,8 +20,7 @@ We can calculate W&C Fst using vcftools
 On mac
 ```
 /Users/alexjvr/2018.postdoc/BrownArgus_2018/201902_DataAnalysis/ManHattanPlot
-#Use the vcf with no MAF filter
-
+#I initiall used the vcf with no MAF filter
 scp bluecp3:/newhome/aj18951/1a_Aricia_agestis_PopGenomics/FINAL_VCF/AA251_FINAL.noMT.recode.vcf .
 
 vcftools --vcf AA251_FINAL.noMT.recode.vcf 
@@ -33,6 +32,26 @@ After filtering, kept 251 out of 251 Individuals
 After filtering, kept 136613 out of a possible 136613 Sites
 
 Run Time = 2.00 seconds
+
+
+
+#But the outlier analysis (Bayescan) was run on the vcf with 5% MAF filter, so final figures based on that: 
+
+
+vcftools --vcf AAgestis.251.MAF0.05.missing0.5perpop.noMT.vcf
+
+
+VCFtools - 0.1.17
+(C) Adam Auton and Anthony Marcketta 2009
+
+Parameters as interpreted:
+	--vcf AAgestis.251.MAF0.05.missing0.5perpop.noMT.vcf
+
+After filtering, kept 251 out of 251 Individuals
+After filtering, kept 35462 out of a possible 35462 Sites
+Run Time = 3.00 seconds
+
+
 
 
 head popnames
@@ -55,10 +74,10 @@ grep Geranium popnames |awk '{print $1,$2}' >> Ger.names
 
 
 #Estimate per locus W&C Fst
-vcftools --vcf AA251_FINAL.noMT.recode.vcf  --weir-fst-pop RR.names --weir-fst-pop Ger.names --out RR.vs.Ger
+vcftools --vcf AAgestis.251.MAF0.05.missing0.5perpop.noMT.vcf  --weir-fst-pop RR.names --weir-fst-pop Ger.names --out RR.vs.Ger
 
 Parameters as interpreted:
-	--vcf AA251_FINAL.noMT.recode.vcf
+	--vcf AAgestis.251.MAF0.05.missing0.5perpop.noMT.vcf
 	--weir-fst-pop RR.names
 	--weir-fst-pop Ger.names
 	--keep RR.names
@@ -68,10 +87,11 @@ Parameters as interpreted:
 Keeping individuals in 'keep' list
 After filtering, kept 251 out of 251 Individuals
 Outputting Weir and Cockerham Fst estimates.
-Weir and Cockerham mean Fst estimate: 0.0093096
-Weir and Cockerham weighted Fst estimate: 0.018971
-After filtering, kept 136613 out of a possible 136613 Sites
-Run Time = 19.00 seconds
+Weir and Cockerham mean Fst estimate: 0.016332
+Weir and Cockerham weighted Fst estimate: 0.018222
+After filtering, kept 35462 out of a possible 35462 Sites
+Run Time = 5.00 seconds
+
 
 
 
@@ -82,8 +102,24 @@ grep new popnames |awk '{print $1,$2}' >> New.names
 grep old popnames |awk '{print $1,$2}' >> Est.names
 
 #Estimate per locus W&C Fst
-vcftools --vcf AA251_FINAL.noMT.recode.vcf  --weir-fst-pop New.names --weir-fst-pop Est.names --out New.vs.Est
+vcftools --vcf AAgestis.251.MAF0.05.missing0.5perpop.noMT.vcf  --weir-fst-pop New.names --weir-fst-pop Est.names --out New.vs.Est
 
+Parameters as interpreted:
+	--vcf AAgestis.251.MAF0.05.missing0.5perpop.noMT.vcf
+	--weir-fst-pop New.names
+	--weir-fst-pop Est.names
+	--keep New.names
+	--keep Est.names
+	--out New.vs.Est
+
+Keeping individuals in 'keep' list
+After filtering, kept 251 out of 251 Individuals
+Outputting Weir and Cockerham Fst estimates.
+
+Weir and Cockerham mean Fst estimate: 0.026095
+Weir and Cockerham weighted Fst estimate: 0.029627
+After filtering, kept 35462 out of a possible 35462 Sites
+Run Time = 5.00 seconds
 
 
 
@@ -100,7 +136,7 @@ We're using Manhattan plot from qqman. See docs [here](https://www.rdocumentatio
 ```
 ##HostPlant
 sed 's:SUPER_::g' RR.vs.Ger.weir.fst > Fst.results.RRvsGer
-sed 's:Z:50:g' Fst.results.RRvsGer2 > Fst.results.RRvsGer2
+sed 's:Z:50:g' Fst.results.RRvsGer > Fst.results.RRvsGer2
 rm Fst.results.RRvsGer && mv Fst.results.RRvsGer2 Fst.results.RRvsGer
 
 ##ColHist
@@ -153,6 +189,9 @@ HPCH4	Both	CHR Z	39688177	39688352	175	12![image](https://user-images.githubuser
 
 We've renamed the chromosomes to be numbers (1-22, Z=50) using awk
 ```
+R
+
+
 #Read in data and remove NAs
 Fst.HP <- read.table("Fst.results.RRvsGer", header=T)
 Fst.HP.nomiss <- na.exclude(Fst.HP)
