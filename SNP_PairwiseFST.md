@@ -243,7 +243,9 @@ HIGHLIGHT_HPSNPS <- as.character(c("HP1", "HP2", "HP3", "HP4", "HP5", "HP6", "HP
 HIGHLIGHT_CHSNPS <- as.character(c("CH1", "CH2", "CH3", "CH4", "CH5", "CH6", "CH7", "CH8", "CH9", "CH10", "CH11", "CH12", "CH13", "CH14", "CH15", "HPCH1", "HPCH2", "HPCH3", "HPCH4"))
 ```
 
-Draw manhattan plot
+Draw manhattan plot. 
+
+Export to pdf for quick view, and .eps to open in Adobe Illustrator (had trouble opening the pdf). 
 ```
 library(qqman)
 
@@ -251,7 +253,18 @@ pdf("HP.manhattan.pdf")
 manhattan(Fst.HP.nomiss, chr="CHROM", bp="POS", p="WEIR_AND_COCKERHAM_FST", snp="SNP", col=c("gray10", "gray60"), chrlabs=c(1:22, "Z"), highlight=HIGHLIGHT_HPSNPS, logp=F, suggestiveline=F, genomewideline=F)
 dev.off()
 
+setEPS()
+postscript("HP.manhattan.eps")
+manhattan(Fst.HP.nomiss, chr="CHROM", bp="POS", p="WEIR_AND_COCKERHAM_FST", snp="SNP", col=c("gray10", "gray60"), chrlabs=c(1:22, "Z"), highlight=HIGHLIGHT_HPSNPS, logp=F, suggestiveline=F, genomewideline=F)
+dev.off()
+
 
 pdf("CH.manhattan.pdf")
 manhattan(Fst.CH.nomiss, chr="CHROM", bp="POS", p="WEIR_AND_COCKERHAM_FST", snp="SNP", col=c("gray10", "gray60"), chrlabs=c(1:22, "Z"), highlight=HIGHLIGHT_CHSNPS, logp=F, suggestiveline=F, genomewideline=F)
 dev.off()
+
+setEPS()
+postscript("CH.manhattan.eps")
+manhattan(Fst.CH.nomiss, chr="CHROM", bp="POS", p="WEIR_AND_COCKERHAM_FST", snp="SNP", col=c("gray10", "gray60"), chrlabs=c(1:22, "Z"), highlight=HIGHLIGHT_CHSNPS, logp=F, suggestiveline=F, genomewideline=F)
+dev.off()
+
