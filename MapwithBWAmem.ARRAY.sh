@@ -17,18 +17,22 @@ module load apps/bwa-0.7.15
 module load apps/samtools-1.8
 
 #Define variables
-
-RefSeq=Aricia_agestis_Red_MESPA.fasta
+RefSeq=GCA_905147365.1_ilAriAges1.1_genomic.fna
 total_files=`find demultiplexed.ipyrad_lib1.6/ -name '*.fastq.gz' | wc -l`
-#ls demultiplexed.ipyrad_lib1.6/*R1*fastq.gz >> R1.names
-#sed -i s:demultiplexed.ipyrad_lib1.6/::g R1.names
-#ls demultiplexed.ipyrad_lib1.6/*R2*fastq.gz >> R2.names
-#sed -i s:demultiplexed.ipyrad_lib1.6/::g R2.names
 
+#Create the input files listing all forward and reverse reads
+ls demultiplexed.ipyrad_lib1.6/*R1*fastq.gz >> R1.names
+sed -i s:demultiplexed.ipyrad_lib1.6/::g R1.names
+ls demultiplexed.ipyrad_lib1.6/*R2*fastq.gz >> R2.names
+sed -i s:demultiplexed.ipyrad_lib1.6/::g R2.names
+
+
+#Set up array
 NAME1=$(sed "${PBS_ARRAYID}q;d" R1.namesaa)
 NAME2=$(sed "${PBS_ARRAYID}q;d" R2.namesaa)
 
-#arr=("demultiplexed.ipyrad_lib1.6/"*.fastq.gz)
+
+#Initiate log file
 echo "mapping started" >> map.log
 echo "---------------" >> map.log
 
